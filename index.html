@@ -244,6 +244,9 @@
                 let weekly_reset = new Date();
                 weekly_reset.setUTCHours(0, 0, 0, 0);
                 let daysleft = ((8 - now.getUTCDay()) % 7); // get days until reset day
+                if (daysleft == 0) {
+                    daysleft = 7;
+                } // if current day reset, get next weeks reset
                 weekly_reset.setUTCDate(weekly_reset.getUTCDate() + daysleft); // get next weekly reset time
 
                 let weekly_distance = weekly_reset.getTime() - now.getTime();
