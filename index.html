@@ -195,7 +195,7 @@
                 let daily_reset = new Date();
                 daily_reset.setUTCHours(24, 0, 0, 0); // get next daily reset time
 
-                let daily_distance = daily_reset.getUTCTime() - now.getUTCTime(); // get time until reset
+                let daily_distance = daily_reset.getTime() - now.getTime(); // get time until reset
 
                 // split and convert from ms to units
                 let d_days = Math.floor(daily_distance / (1000 * 60 * 60 * 24));
@@ -246,7 +246,7 @@
                 let daysleft = ((8 - now.getUTCDay()) % 7); // get days until reset day
                 weekly_reset.setUTCDate(weekly_reset.getUTCDate() + daysleft); // get next weekly reset time
 
-                let weekly_distance = weekly_reset.getUTCTime() - now.getUTCTime();
+                let weekly_distance = weekly_reset.getTime() - now.getTime();
 
                 let w_days = Math.floor(weekly_distance / (1000 * 60 * 60 * 24));
                 let w_hours = Math.floor((weekly_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -313,7 +313,7 @@
                 boss_reset.setUTCHours(0, 0, 0, 0);
                 boss_reset.setUTCDate(boss_reset.getUTCDate() + ((11 - now.getUTCDay()) % 7));
 
-                let boss_distance = boss_reset.getUTCTime() - now.getUTCTime();
+                let boss_distance = boss_reset.getTime() - now.getTime();
 
                 let b_days = Math.floor(boss_distance / (1000 * 60 * 60 * 24));
                 let b_hours = Math.floor((boss_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
