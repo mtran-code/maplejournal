@@ -10,6 +10,11 @@
 
     <div id="top">
         <img src="assets/logo.png">
+        <button onclick="resetAll('daily_boss')">DEV BUTTON: RESET DAILY BOSS &#8634;</button>
+        <button onclick="resetAll('weekly_boss')">DEV BUTTON: RESET WEEKLY BOSS &#8634;</button>
+        <button onclick="resetAll('arcane')">DEV BUTTON: RESET ARCANE &#8634;</button>
+        <button onclick="resetAll('daily_quest')">DEV BUTTON: RESET DAILY QUEST &#8634;</button>
+        <button onclick="resetAll('weekly_quest')">DEV BUTTON: RESET WEEKLY QUEST &#8634;</button>
     </div>
 
     <div id="main">
@@ -30,11 +35,7 @@
                 let image = document.getElementById("stamp_" + elid);
 
                 if (element.classList.contains("checked")) {
-                    element.classList.toggle("checked");
-                    image.classList.remove(...image.classList);
-                    image.style.opacity = 0;
-
-                    image.classList.remove("stampInAnim");
+                    resetButton(elid);
                 } else {
                     element.classList.toggle("checked");
                     image.style.opacity = 1;
@@ -81,6 +82,95 @@
                 let element = document.getElementById(elid);
                 element.classList.toggle("turnedin");
             }
+
+            function resetButton(elid) {
+                let element = document.getElementById(elid);
+                let image = document.getElementById("stamp_" + elid);
+                if (element.classList.contains("checked")) {
+                    element.classList.toggle("checked");
+                    image.classList.remove(...image.classList);
+                    image.style.opacity = 0;
+
+                    image.classList.remove("stampInAnim");
+                }
+            }
+            function resetQuest(elid) {
+                let element = document.getElementById(elid);
+                if (element.classList.contains("turnedin")) {
+                    element.classList.toggle("turnedin");
+                }
+            }
+            function resetAll(type) {
+                if (type == "daily_boss") {
+                    resetButton("dzak");
+                    resetButton("dmag");
+                    resetButton("dhilla");
+                    resetButton("dht");
+                    resetButton("dpap");
+                    resetButton("dvl");
+                    resetButton("dark");
+                    resetButton("dpb");
+                    resetButton("dpierre");
+                    resetButton("dvb");
+                    resetButton("dcqueen");
+                    resetButton("dvell");
+                    resetButton("dranmaru");
+                    resetButton("domnicln");
+                    resetButton("djulietta");
+                    resetButton("dgollux");
+                } else if (type == "weekly_boss") {
+                    resetButton("whilla");
+                    resetButton("wpb");
+                    resetButton("wcyg");
+                    resetButton("wzak");
+                    resetButton("wpierre");
+                    resetButton("wvb");
+                    resetButton("wcqueen");
+                    resetButton("wvell");
+                    resetButton("wpno");
+                    resetButton("wmag");
+                    resetButton("wpap");
+                    resetButton("wakechi");
+                    resetButton("wlotus");
+                    resetButton("wdamien");
+                    resetButton("wlucid");
+                    resetButton("wwill");
+                    resetButton("wgloom");
+                    resetButton("wdnell");
+                    resetButton("wvhilla");
+                    resetButton("wseren");
+                } else if (type == "arcane") {
+                    resetButton("vj");
+                    resetButton("vjpq");
+                    resetButton("chuchu");
+                    resetButton("chuchupq");
+                    resetButton("lach");
+                    resetButton("lachpq");
+                    resetButton("arcana");
+                    resetButton("arcanapq");
+                    resetButton("morass");
+                    resetButton("morasspq");
+                    resetButton("esfera");
+                    resetButton("esferapq");
+                } else if (type == "daily_quest") {
+                    resetQuest("bulb_fairybros");
+                    resetQuest("bulb_legion");
+                    resetQuest("bulb_ursus");
+                    resetQuest("bulb_mapletour");
+                    resetQuest("bulb_commerci");
+                    resetQuest("bulb_monsterpark");
+                    resetQuest("bulb_yugarden");
+                    resetQuest("bulb_phantomforest");
+                } else if (type == "weekly_quest") {
+                    resetQuest("bulb_guild");
+                    resetQuest("bulb_dojo");
+                    resetQuest("bulb_scrapyard");
+                    resetQuest("bulb_worldtree");
+                    resetQuest("bulb_kritias");
+                } else {
+                    return;
+                }
+            }
             
             setInterval(function() {
                 let now = new Date();
@@ -94,6 +184,15 @@
                 let d_hours = Math.floor((daily_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let d_minutes = Math.floor((daily_distance % (1000 * 60 * 60)) / (1000 * 60));
                 let d_seconds = Math.floor((daily_distance % (1000 * 60)) / 1000);
+
+                if (d_days == 0 &&
+                    d_hours == 0 &&
+                    d_minutes == 0 &&
+                    d_seconds == 0) {
+                    resetAll("daily_boss");
+                    resetAll("arcane");
+                    resetAll("daily_quest");
+                }
                 
                 if (d_hours > 0) {
                     if (d_minutes < 10) {
@@ -133,6 +232,13 @@
                 let w_hours = Math.floor((weekly_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let w_minutes = Math.floor((weekly_distance % (1000 * 60 * 60)) / (1000 * 60));
                 let w_seconds = Math.floor((weekly_distance % (1000 * 60)) / 1000);
+
+                if (w_days == 0 &&
+                    w_hours == 0 &&
+                    w_minutes == 0 &&
+                    w_seconds == 0) {
+                    resetAll("weekly_quest");
+                }
 
                 if (w_days > 0) {
                     if (w_hours < 10) {
@@ -191,6 +297,13 @@
                 let b_hours = Math.floor((boss_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let b_minutes = Math.floor((boss_distance % (1000 * 60 * 60)) / (1000 * 60));
                 let b_seconds = Math.floor((boss_distance % (1000 * 60)) / 1000);
+
+                if (b_days == 0 &&
+                    b_hours == 0 &&
+                    b_minutes == 0 &&
+                    b_seconds == 0) {
+                    resetAll("weekly_boss");
+                }
                 
                 if (b_days > 0) {
                     if (b_hours < 10) {
@@ -340,7 +453,7 @@
 
         <div class="column">
             <div id="arcane" class="genlist">
-                <h2 class="gridhead">ARCANE RIVER DAILIES</h2>
+                <h2 class="gridhead">ARCANE RIVER QUESTS</h2>
                 <button type="button" id="vj" onclick="checkOff(this.id)">
                     <img id="stamp_vj" class="stamp" src="assets/quest/stamp.png">
                 </button>
