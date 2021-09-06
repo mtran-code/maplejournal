@@ -55,6 +55,10 @@ h2 { font-family: "Titillium Web", Helvetica, sans-serif; }
     justify-content: center;
 }
 
+.hide {
+    display: none;
+}
+
 /* countdown timers */
 .timer {
     display: flex;
