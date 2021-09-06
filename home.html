@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Maple Journal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png"/>
+</head>
+
+<body>
+
+    <div id="top">
+        <img src="assets/logo.png">
+    </div>
+
+    <div id="main">
+
+        <script>
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min) ) + min;
+            }
+            function triggerAnim(element, anim) {
+                if (!element) return;
+                element.classList.remove(anim);
+                void element.offsetWidth;
+                element.classList.add(anim);
+            }
+            var buffer = 0;
+            function checkOff(elid) {
+                let element = document.getElementById(elid);
+                let image = document.getElementById("stamp_" + elid);
+
+                if (element.classList.contains("checked")) {
+                    element.classList.toggle("checked");
+                    image.classList.remove(...image.classList);
+                    image.style.opacity = 0;
+
+                    image.classList.remove("stampInAnim");
+                } else {
+                    element.classList.toggle("checked");
+                    image.style.opacity = 1;
+
+                    let theta = getRndInteger(-60, 60) * Math.PI / 180;
+                    let newAnim = document.createElement("style");
+                    buffer += 1;
+                    if (buffer > 5) {
+                        buffer = 1;
+                    }
+                    newAnim.id = "anim" + buffer;
+                    if (document.getElementById(newAnim.id)) {
+                        document.head.removeChild(document.getElementById(newAnim.id));
+                    }
+                    newAnim.innerHTML = "\
+                        .stampInAnim" + buffer + " {\
+                            animation: stampInAnim" + buffer + " 150ms forwards;\
+                            opacity: 1;\
+                        }\
+                        @keyframes stampInAnim" + buffer + " {\
+                            0% {\
+                                transform: matrix(1.5, 0, 0, 1.5, 0, -32);\
+                                opacity: 0;\
+                            }\
+                            100% {\
+                                transform: matrix(" + Math.cos(theta) + ", " + Math.sin(theta) + ", " + Math.sin(theta) * -1 + ", " + Math.cos(theta) + ", 0, 0);\
+                                opacity: 1;\
+                            }\
+                        }\
+                    "
+                    document.head.appendChild(newAnim);
+                    image.classList.remove(...image.classList);
+                    void image.offsetWidth;
+                    image.classList.add("stampInAnim" + buffer);
+                    image.addEventListener("animationend",
+                        function() {
+                            image.classList.remove("stampInAnim" + buffer);
+                            image.style.transform = "matrix(" + Math.cos(theta) + ", " + Math.sin(theta) + ", " + Math.sin(theta) * -1 + ", " + Math.cos(theta) + ", 0, 0)";
+                        }
+                        )
+                }		
+            }
+            function turnIn(elid) {
+                let element = document.getElementById(elid);
+                element.classList.toggle("turnedin");
+            }
+            
+            setInterval(function() {
+                let now = new Date();
+
+                let daily_reset = new Date();
+                daily_reset.setUTCHours(24, 0, 0, 0);
+
+                let daily_distance = daily_reset.getTime() - now.getTime();
+
+                let d_days = Math.floor(daily_distance / (1000 * 60 * 60 * 24));
+                let d_hours = Math.floor((daily_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let d_minutes = Math.floor((daily_distance % (1000 * 60 * 60)) / (1000 * 60));
+                let d_seconds = Math.floor((daily_distance % (1000 * 60)) / 1000);
+                
+                if (d_hours > 0) {
+                    if (d_minutes < 10) {
+                        d_minutes = "0" + String(d_minutes);
+                    }
+                    document.getElementById("daily_hr").style.display = "inline";
+                    document.getElementById("daily_hr_unit").style.display = "inline";
+                    document.getElementById("daily_sec").style.display = "none";
+                    document.getElementById("daily_sec_unit").style.display = "none";
+
+                    document.getElementById("daily_hr").innerHTML = d_hours;
+                    document.getElementById("daily_min").innerHTML = d_minutes;
+                } else {
+                    if (d_seconds < 10) {
+                        d_seconds = "0" + String(d_seconds);
+                    }
+                    document.getElementById("daily_hr").style.display = "none";
+                    document.getElementById("daily_hr_unit").style.display = "none";
+                    document.getElementById("daily_sec").style.display = "inline";
+                    document.getElementById("daily_sec_unit").style.display = "inline";
+
+                    document.getElementById("daily_min").innerHTML = d_minutes;
+                    document.getElementById("daily_sec").innerHTML = d_seconds;
+                }
+
+                let weekly_reset = new Date();
+                weekly_reset.setUTCHours(0, 0, 0, 0);
+                let daysleft = ((8 - now.getUTCDay()) % 7);
+                if (daysleft == 0) {
+                    daysleft = 7;
+                }
+                weekly_reset.setUTCDate(weekly_reset.getUTCDate() + daysleft);
+
+                let weekly_distance = weekly_reset.getTime() - now.getTime();
+
+                let w_days = Math.floor(weekly_distance / (1000 * 60 * 60 * 24));
+                let w_hours = Math.floor((weekly_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let w_minutes = Math.floor((weekly_distance % (1000 * 60 * 60)) / (1000 * 60));
+                let w_seconds = Math.floor((weekly_distance % (1000 * 60)) / 1000);
+
+                if (w_days > 0) {
+                    if (w_hours < 10) {
+                            w_hours = "0" + String(w_hours);
+                    }
+                    document.getElementById("weekly_day").style.display = "inline";
+                    document.getElementById("weekly_day_unit").style.display = "inline";
+                    document.getElementById("weekly_hr").style.display = "inline";
+                    document.getElementById("weekly_hr_unit").style.display = "inline";
+                    document.getElementById("weekly_min").style.display = "none";
+                    document.getElementById("weekly_min_unit").style.display = "none";
+                    document.getElementById("weekly_sec").style.display = "none";
+                    document.getElementById("weekly_sec_unit").style.display = "none";
+
+                    document.getElementById("weekly_day").innerHTML = w_days;
+                    document.getElementById("weekly_hr").innerHTML = w_hours;
+                } else if (w_hours > 0) {
+                    if (w_minutes < 10) {
+                            w_minutes = "0" + String(w_minutes);
+                    }
+                    document.getElementById("weekly_day").style.display = "none";
+                    document.getElementById("weekly_day_unit").style.display = "none";
+                    document.getElementById("weekly_hr").style.display = "inline";
+                    document.getElementById("weekly_hr_unit").style.display = "inline";
+                    document.getElementById("weekly_min").style.display = "inline";
+                    document.getElementById("weekly_min_unit").style.display = "inline";
+                    document.getElementById("weekly_sec").style.display = "none";
+                    document.getElementById("weekly_sec_unit").style.display = "none";
+
+                    document.getElementById("weekly_hr").innerHTML = w_hours;
+                    document.getElementById("weekly_min").innerHTML = w_minutes;                       
+                } else {
+                    if (w_seconds < 10) {
+                            w_seconds = "0" + String(w_seconds);
+                    }
+                    document.getElementById("weekly_day").style.display = "none";
+                    document.getElementById("weekly_day_unit").style.display = "none";
+                    document.getElementById("weekly_hr").style.display = "none";
+                    document.getElementById("weekly_hr_unit").style.display = "none";
+                    document.getElementById("weekly_min").style.display = "inline";
+                    document.getElementById("weekly_min_unit").style.display = "inline";
+                    document.getElementById("weekly_sec").style.display = "inline";
+                    document.getElementById("weekly_sec_unit").style.display = "inline";
+
+                    document.getElementById("weekly_min").innerHTML = w_minutes;
+                    document.getElementById("weekly_sec").innerHTML = w_seconds;
+                }
+
+                let boss_reset = new Date();
+                boss_reset.setUTCHours(0, 0, 0, 0);
+                boss_reset.setUTCDate(boss_reset.getUTCDate() + ((11 - now.getUTCDay()) % 7));
+
+                let boss_distance = boss_reset.getTime() - now.getTime();
+
+                let b_days = Math.floor(boss_distance / (1000 * 60 * 60 * 24));
+                let b_hours = Math.floor((boss_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let b_minutes = Math.floor((boss_distance % (1000 * 60 * 60)) / (1000 * 60));
+                let b_seconds = Math.floor((boss_distance % (1000 * 60)) / 1000);
+                
+                if (b_days > 0) {
+                    if (b_hours < 10) {
+                            b_hours = "0" + String(b_hours);
+                    }
+                    document.getElementById("boss_day").style.display = "inline";
+                    document.getElementById("boss_day_unit").style.display = "inline";
+                    document.getElementById("boss_hr").style.display = "inline";
+                    document.getElementById("boss_hr_unit").style.display = "inline";
+                    document.getElementById("boss_min").style.display = "none";
+                    document.getElementById("boss_min_unit").style.display = "none";
+                    document.getElementById("boss_sec").style.display = "none";
+                    document.getElementById("boss_sec_unit").style.display = "none";
+
+                    document.getElementById("boss_day").innerHTML = b_days;
+                    document.getElementById("boss_hr").innerHTML = b_hours;
+                } else if (b_hours > 0) {
+                    if (b_minutes < 10) {
+                        b_minutes = "0" + String(b_minutes);
+                    }
+                    document.getElementById("boss_day").style.display = "none";
+                    document.getElementById("boss_day_unit").style.display = "none";
+                    document.getElementById("boss_hr").style.display = "inline";
+                    document.getElementById("boss_hr_unit").style.display = "inline";
+                    document.getElementById("boss_min").style.display = "inline";
+                    document.getElementById("boss_min_unit").style.display = "inline";
+                    document.getElementById("boss_sec").style.display = "none";
+                    document.getElementById("boss_sec_unit").style.display = "none";
+
+                    document.getElementById("boss_hr").innerHTML = b_hours;
+                    document.getElementById("boss_min").innerHTML = b_minutes;                       
+                } else {
+                    if (b_seconds < 10) {
+                        b_seconds = "0" + String(b_seconds);
+                    }
+                    document.getElementById("boss_day").style.display = "none";
+                    document.getElementById("boss_day_unit").style.display = "none";
+                    document.getElementById("boss_hr").style.display = "none";
+                    document.getElementById("boss_hr_unit").style.display = "none";
+                    document.getElementById("boss_min").style.display = "inline";
+                    document.getElementById("boss_min_unit").style.display = "inline";
+                    document.getElementById("boss_sec").style.display = "inline";
+                    document.getElementById("boss_sec_unit").style.display = "inline";
+
+                    document.getElementById("boss_min").innerHTML = b_minutes;
+                    document.getElementById("boss_sec").innerHTML = b_seconds;
+                }
+            }, 1000);
+        </script>
+
+        <div class="column">
+            <div class="timer">
+                <h2>
+                    DAILY RESET<br>
+                    &#128338; Time Left:
+                </h2>
+                <div class="timebox">
+                    <h2 id="timer_daily">
+                        <span id="daily_hr">00</span>
+                        <span id="daily_hr_unit" class="timeunit">Hr</span>
+                        <span id="daily_min">00</span>
+                        <span class="timeunit">Min</span>
+                        <span id="daily_sec" class="hide">00</span>
+                        <span id="daily_sec_unit" class="timeunit hide">Sec</span>
+                    </h2>
+                </div>
+            </div>
+
+            <div id="dailywindow" class="gamewindow">
+                <h2 class="gridhead">DAILY QUESTS</h2>
+                <div id="dailyview" class="gameview">
+                    <img id="npc_fairybros" class="npc fairybros" src="assets/npc/0_Fairy_Bros.png">
+                    <button type="button" id="bulb_fairybros" class="questbulb fairybros" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Gift.png">
+                    </button>
+                    <div class="fairybros">
+                        <p class="caption">Fairy Bros</p>
+                        <p class="caption">Daily Gift</p>
+                    </div>
+                    
+                    
+                    <img id="npc_legion" class="npc legion" src="assets/npc/0_Dame Appropriation.png">
+                    <button type="button" id="bulb_legion" class="questbulb legion" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Legion_Coin.png">
+                    </button>
+                    <div class="legion">
+                        <p class="caption">Dame Appropriation</p>
+                        <p class="caption">Maple Legion</p>
+                    </div>
+                    
+                    <img id="npc_ursus" class="npc ursus" src="assets/npc/0_Masarayu.png">
+                    <button type="button" id="bulb_ursus" class="questbulb ursus" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Ursus.png">
+                    </button>
+                    <div class="ursus">
+                        <p class="caption">Masarayu</p>
+                        <p class="caption">Ursus</p>
+                    </div>
+                    
+                    <img id="npc_mapletour" class="npc mapletour" src="assets/npc/0_Lulu_Spinel.png">
+                    <button type="button" id="bulb_mapletour" class="questbulb mapletour" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Maple_Tour_Coin.png">
+                    </button>
+                    <div class="mapletour">
+                        <p class="caption">Lulu Spinel</p>
+                        <p class="caption">Maple Tour</p>
+                    </div>
+                    
+                    <img id="npc_commerci" class="npc commerci" src="assets/npc/0_Maestra_Fiametta.png">
+                    <button type="button" id="bulb_commerci" class="questbulb commerci" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Commerci_Denaro.png">
+                    </button>
+                    <div class="commerci">
+                        <p class="caption">Maestra Fiametta</p>
+                        <p class="caption">Commerci Trade</p>
+                    </div>
+                   
+                    <img id="npc_monsterpark" class="npc monsterpark" src="assets/npc/0_Spiegelmann.png">
+                    <button type="button" id="bulb_monsterpark" class="questbulb monsterpark" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Monster_Park_Commemorative_Coin.png">
+                    </button>
+                    <div class="monsterpark">
+                        <p class="caption">Spiegelmann</p>
+                        <p class="caption">Monster Park</p>
+                    </div>
+                    
+                    <img id="npc_yugarden" class="npc yugarden" src="assets/npc/0_Mr_Jo.png">
+                    <button type="button" id="bulb_yugarden" class="questbulb yugarden" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Yu_Garden_Coin.png">
+                    </button>
+                    <div class="yugarden">
+                        <p class="caption">Mr. Jo</p>
+                        <p class="caption">Yu Garden</p>
+                    </div>
+                    
+                    <img id="npc_phantomforest" class="npc phantomforest" src="assets/npc/0_Taggrin.png">
+                    <button type="button" id="bulb_phantomforest" class="questbulb phantomforest" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Daily_Shadowknight_Coin.png">
+                    </button>
+                    <div class="phantomforest">
+                        <p class="caption">Taggrin</p>
+                        <p class="caption">Phantom Forest</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div id="arcane" class="genlist">
+                <h2 class="gridhead">ARCANE RIVER DAILIES</h2>
+                <button type="button" id="vj" onclick="checkOff(this.id)">
+                    <img id="stamp_vj" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img src="assets/arcane/Arcane_Symbol_Vanishing_Journey.png">
+                <button type="button" id="vjpq" onclick="checkOff(this.id)">
+                    <img id="stamp_vjpq" class="stamp" src="assets/quest/stamp.png">
+                </button>
+    
+                <button type="button" id="chuchu" onclick="checkOff(this.id)">
+                    <img id="stamp_chuchu" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img src="assets/arcane/Arcane_Symbol_Chu_Chu_Island.png">
+                <button type="button" id="chuchupq" onclick="checkOff(this.id)">
+                    <img id="stamp_chuchupq" class="stamp" src="assets/quest/stamp.png">
+                </button>
+    
+                <button type="button" id="lach" onclick="checkOff(this.id)">
+                    <img id="stamp_lach" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img src="assets/arcane/Arcane_Symbol_Lachelein.png">
+                <button type="button" id="lachpq" onclick="checkOff(this.id)">
+                    <img id="stamp_lachpq" class="stamp" src="assets/quest/stamp.png">
+                </button>
+        
+                <button type="button" id="arcana" onclick="checkOff(this.id)">
+                    <img id="stamp_arcana" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img src="assets/arcane/Arcane_Symbol_Arcana.png">
+                <button type="button" id="arcanapq" onclick="checkOff(this.id)">
+                    <img id="stamp_arcanapq" class="stamp" src="assets/quest/stamp.png">
+                </button>
+    
+                <button type="button" id="morass" onclick="checkOff(this.id)">
+                    <img id="stamp_morass" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img src="assets/arcane/Arcane_Symbol_Morass.png">
+                <button type="button" id="morasspq" onclick="checkOff(this.id)" disabled>
+                    <img id="stamp_morasspq" class="stamp" src="assets/quest/stamp.png">
+                </button>
+        
+                <button type="button" id="esfera" onclick="checkOff(this.id)">
+                    <img id="stamp_esfera" class="stamp" src="assets/quest/stamp.png"></button>
+                <img src="assets/arcane/Arcane_Symbol_Esfera.png">
+                <button type="button" id="esferapq" onclick="checkOff(this.id)" disabled>
+                    <img id="stamp_esferapq" class="stamp" src="assets/quest/stamp.png">
+                </button>
+            </div>
+
+            <div id="dailyboss" class="genlist bosslist">
+                <h2 class="gridhead">DAILY BOSSES</h2>
+                <button type="button" id="dzak" onclick="checkOff(this.id)">
+                    <img id="stamp_dzak" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dmag" onclick="checkOff(this.id)">
+                    <img id="stamp_dmag" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dhilla" onclick="checkOff(this.id)">
+                    <img id="stamp_dhilla" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dht" onclick="checkOff(this.id)">
+                    <img id="stamp_dht" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="dpap" onclick="checkOff(this.id)">
+                    <img id="stamp_dpap" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dvl" onclick="checkOff(this.id)">
+                    <img id="stamp_dvl" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dark" onclick="checkOff(this.id)">
+                    <img id="stamp_dark" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dpb" onclick="checkOff(this.id)">
+                    <img id="stamp_dpb" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="dpierre" onclick="checkOff(this.id)">
+                    <img id="stamp_dpierre" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dvb" onclick="checkOff(this.id)">
+                    <img id="stamp_dvb" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dcqueen" onclick="checkOff(this.id)">
+                    <img id="stamp_dcqueen" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dvell" onclick="checkOff(this.id)">
+                    <img id="stamp_dvell" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="dranmaru" onclick="checkOff(this.id)">
+                    <img id="stamp_dranmaru" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="domnicln" onclick="checkOff(this.id)">
+                    <img id="stamp_domnicln" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="djulietta" onclick="checkOff(this.id)">
+                    <img id="stamp_djulietta" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="dgollux" onclick="checkOff(this.id)">
+                    <img id="stamp_dgollux" class="stamp" src="assets/quest/stamp.png">
+                </button>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="timer">
+                <h2>
+                    WEEKLY RESET<br>
+                    &#128338; Time Left:
+                </h2>
+                <div class="timebox">
+                    <h2 id="timer_weekly">
+                        <span id="weekly_day">00</span>
+                        <span id="weekly_day_unit" class="timeunit">Day</span>
+                        <span id="weekly_hr">00</span>
+                        <span id="weekly_hr_unit" class="timeunit">Hr</span>
+                        <span id="weekly_min" class="hide">00</span>
+                        <span id="weekly_min_unit" class="timeunit hide">Min</span>
+                        <span id="weekly_sec" class="hide">00</span>
+                        <span id="weekly_sec_unit" class="timeunit hide">Sec</span>
+                    </h2>
+                </div>
+            </div>
+
+            <div id="weeklywindow" class="gamewindow">
+                <h2 class="gridhead">WEEKLY QUESTS</h2>
+                <div id="weeklyview" class="gameview">
+                    <img id="npc_guild" class="npc guild" src="assets/npc/1_Deia.png">
+                    <button type="button" id="bulb_guild" class="questbulb guild" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Weekly_Blessing_of_the_Guild.png">
+                    </button>
+                    <div id="caption_guild" class="guild">
+                        <p class="caption">Deia</p>
+                        <p class="caption">Guild Gift</p>
+                    </div>
+    
+                    <img id="npc_dojo" class="npc dojo" src="assets/npc/1_So_Gong.png">
+                    <button type="button" id="bulb_dojo" class="questbulb dojo" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Weekly_Mu_Lung_Dojo.png">
+                    </button>
+                    <div id="caption_dojo" class="dojo">
+                        <p class="caption">So Gong</p>
+                        <p class="caption">Mu Lung Dojo</p>
+                    </div>
+    
+                    <img id="npc_scrapyard" class="npc scrapyard" src="assets/npc/1_One_Eye.png">
+                    <button type="button" id="bulb_scrapyard" class="questbulb scrapyard" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Weekly_Diffusion-Line_Energy_Core.png">
+                    </button>
+                    <div class="scrapyard">
+                        <p class="caption">One-Eye</p>
+                        <p class="caption">Scrapyard</p>
+                    </div>
+    
+                    <img id="npc_worldtree" class="npc worldtree" src="assets/npc/1_Alchetto.png">
+                    <button type="button" id="bulb_worldtree" class="questbulb worldtree" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Weekly_Faint_Stigma_Spirit_Stone.png">
+                    </button>
+                    <div class="worldtree">
+                        <p class="caption">Alchetto</p>
+                        <p class="caption">Dark World Tree</p>
+                    </div>
+    
+                    <img id="npc_kritias" class="npc kritias" src="assets/npc/1_Isaac.png">
+                    <button type="button" id="bulb_kritias" class="questbulb kritias" onclick="turnIn(this.id)">
+                        <img src="assets/coin/Weekly_Anti-magic_Stone.png">
+                    </button>
+                    <div class="kritias">
+                        <p class="caption">Isaac</p>
+                        <p class="caption">Kritias</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="timer">
+                <h2>
+                    BOSS RESET<br>
+                    &#128338; Time Left:
+                </h2>
+                <div class="timebox">
+                    <h2 id="timer_boss">
+                        <span id="boss_day">00</span>
+                        <span id="boss_day_unit" class="timeunit">Day</span>
+                        <span id="boss_hr">00</span>
+                        <span id="boss_hr_unit" class="timeunit">Hr</span>
+                        <span id="boss_min" class="hide">00</span>
+                        <span id="boss_min_unit" class="timeunit hide">Min</span>
+                        <span id="boss_sec" class="hide">00</span>
+                        <span id="boss_sec_unit" class="timeunit hide">Sec</span>
+                    </h2>
+                </div>
+            </div>
+            <div id="weeklyboss" class="genlist bosslist">
+                <h2 class="gridhead">WEEKLY BOSSES</h2>
+                <button type="button" id="whilla" onclick="checkOff(this.id)">
+                    <img id="stamp_whilla" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wpb" onclick="checkOff(this.id)">
+                    <img id="stamp_wpb" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wcyg" onclick="checkOff(this.id)">
+                    <img id="stamp_wcyg" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wzak" onclick="checkOff(this.id)">
+                    <img id="stamp_wzak" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="wpierre" onclick="checkOff(this.id)">
+                    <img id="stamp_wpierre" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wvb" onclick="checkOff(this.id)">
+                    <img id="stamp_wvb" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wcqueen" onclick="checkOff(this.id)">
+                    <img id="stamp_wcqueen" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wvell" onclick="checkOff(this.id)">
+                    <img id="stamp_wvell" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="wpno" onclick="checkOff(this.id)">
+                    <img id="stamp_wpno" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wmag" onclick="checkOff(this.id)">
+                    <img id="stamp_wmag" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wpap" onclick="checkOff(this.id)">
+                    <img id="stamp_wpap" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wakechi" onclick="checkOff(this.id)">
+                    <img id="stamp_wakechi" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="wlotus" onclick="checkOff(this.id)">
+                    <img id="stamp_wlotus" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wdamien" onclick="checkOff(this.id)">
+                    <img id="stamp_wdamien" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wlucid" onclick="checkOff(this.id)">
+                    <img id="stamp_wlucid" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wwill" onclick="checkOff(this.id)">
+                    <img id="stamp_wwill" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="wgloom" onclick="checkOff(this.id)">
+                    <img id="stamp_wgloom" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wdnell" onclick="checkOff(this.id)">
+                    <img id="stamp_wdnell" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wvhilla" onclick="checkOff(this.id)">
+                    <img id="stamp_wvhilla" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="wseren" onclick="checkOff(this.id)">
+                    <img id="stamp_wseren" class="stamp" src="assets/quest/stamp.png">
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
