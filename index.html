@@ -10,6 +10,8 @@
 
     <div id="top">
         <img src="assets/logo.png">
+
+        <!-- temporary development buttons -->
         <button onclick="resetAll('daily_boss')">DEV BUTTON: RESET DAILY BOSS &#8634;</button>
         <button onclick="resetAll('weekly_boss')">DEV BUTTON: RESET WEEKLY BOSS &#8634;</button>
         <button onclick="resetAll('arcane')">DEV BUTTON: RESET ARCANE &#8634;</button>
@@ -20,36 +22,39 @@
     <div id="main">
 
         <script>
+            // return random integer within specified range
             function getRndInteger(min, max) {
                 return Math.floor(Math.random() * (max - min) ) + min;
             }
-            function triggerAnim(element, anim) {
-                if (!element) return;
-                element.classList.remove(anim);
-                void element.offsetWidth;
-                element.classList.add(anim);
-            }
-            var buffer = 0;
+
+            var buffer = 0; // used in checkOff function
+        
             function checkOff(elid) {
                 let element = document.getElementById(elid);
                 let image = document.getElementById("stamp_" + elid);
 
+                // if button is already stamped, reset it to unstamped
                 if (element.classList.contains("checked")) {
                     resetButton(elid);
+                // if button is not stamped, stamp it
                 } else {
                     element.classList.toggle("checked");
                     image.style.opacity = 1;
 
-                    let theta = getRndInteger(-60, 60) * Math.PI / 180;
+                    // ====== STAMP ANIMATION CODE ======
+
+                    let theta = getRndInteger(-60, 60) * Math.PI / 180; // randomly rotate stamp by theta radians
                     let newAnim = document.createElement("style");
+                    // buffer: store up to 5 numbered animations at once
                     buffer += 1;
                     if (buffer > 5) {
                         buffer = 1;
                     }
                     newAnim.id = "anim" + buffer;
-                    if (document.getElementById(newAnim.id)) {
+                    if (document.getElementById(newAnim.id)) { // overwrite older animations from buffer
                         document.head.removeChild(document.getElementById(newAnim.id));
                     }
+                    // insert animation css
                     newAnim.innerHTML = "\
                         .stampInAnim" + buffer + " {\
                             animation: stampInAnim" + buffer + " 150ms forwards;\
@@ -67,7 +72,7 @@
                         }\
                     "
                     document.head.appendChild(newAnim);
-                    image.classList.remove(...image.classList);
+                    image.classList.remove(...image.classList); // clear residual classes
                     void image.offsetWidth;
                     image.classList.add("stampInAnim" + buffer);
                     image.addEventListener("animationend",
@@ -75,14 +80,17 @@
                             image.classList.remove("stampInAnim" + buffer);
                             image.style.transform = "matrix(" + Math.cos(theta) + ", " + Math.sin(theta) + ", " + Math.sin(theta) * -1 + ", " + Math.cos(theta) + ", 0, 0)";
                         }
-                        )
+                    ) // set static image after animation ends
                 }		
             }
+
+            // toggle quest bulb completion
             function turnIn(elid) {
                 let element = document.getElementById(elid);
                 element.classList.toggle("turnedin");
             }
 
+            // reset button to unstamped state
             function resetButton(elid) {
                 let element = document.getElementById(elid);
                 let image = document.getElementById("stamp_" + elid);
@@ -94,12 +102,16 @@
                     image.classList.remove("stampInAnim");
                 }
             }
+
+            // reset quest bulb to incomplete
             function resetQuest(elid) {
                 let element = document.getElementById(elid);
                 if (element.classList.contains("turnedin")) {
                     element.classList.toggle("turnedin");
                 }
             }
+
+            // reset all buttons/quests within specified section
             function resetAll(type) {
                 if (type == "daily_boss") {
                     resetButton("dzak");
@@ -118,6 +130,7 @@
                     resetButton("domnicln");
                     resetButton("djulietta");
                     resetButton("dgollux");
+
                 } else if (type == "weekly_boss") {
                     resetButton("whilla");
                     resetButton("wpb");
@@ -139,6 +152,7 @@
                     resetButton("wdnell");
                     resetButton("wvhilla");
                     resetButton("wseren");
+
                 } else if (type == "arcane") {
                     resetButton("vj");
                     resetButton("vjpq");
@@ -152,6 +166,7 @@
                     resetButton("morasspq");
                     resetButton("esfera");
                     resetButton("esferapq");
+
                 } else if (type == "daily_quest") {
                     resetQuest("bulb_fairybros");
                     resetQuest("bulb_legion");
@@ -161,6 +176,7 @@
                     resetQuest("bulb_monsterpark");
                     resetQuest("bulb_yugarden");
                     resetQuest("bulb_phantomforest");
+
                 } else if (type == "weekly_quest") {
                     resetQuest("bulb_guild");
                     resetQuest("bulb_dojo");
@@ -172,19 +188,22 @@
                 }
             }
             
+            // ====== COUNTDOWN TIMER CODE ======
             setInterval(function() {
-                let now = new Date();
+                let now = new Date(); // get current time
 
                 let daily_reset = new Date();
-                daily_reset.setUTCHours(24, 0, 0, 0);
+                daily_reset.setUTCHours(24, 0, 0, 0); // get next daily reset time
 
-                let daily_distance = daily_reset.getTime() - now.getTime();
+                let daily_distance = daily_reset.getUTCTime() - now.getUTCTime(); // get time until reset
 
+                // split and convert from ms to units
                 let d_days = Math.floor(daily_distance / (1000 * 60 * 60 * 24));
                 let d_hours = Math.floor((daily_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let d_minutes = Math.floor((daily_distance % (1000 * 60 * 60)) / (1000 * 60));
                 let d_seconds = Math.floor((daily_distance % (1000 * 60)) / 1000);
 
+                // reset buttons and quests on reset
                 if (d_days == 0 &&
                     d_hours == 0 &&
                     d_minutes == 0 &&
@@ -194,10 +213,12 @@
                     resetAll("daily_quest");
                 }
                 
-                if (d_hours > 0) {
+                if (d_hours > 0) { // when hours left > 0, format: hh:mm
                     if (d_minutes < 10) {
                         d_minutes = "0" + String(d_minutes);
-                    }
+                    } // change single digit format (1 -> 01)
+
+                    // hide/show units
                     document.getElementById("daily_hr").style.display = "inline";
                     document.getElementById("daily_hr_unit").style.display = "inline";
                     document.getElementById("daily_sec").style.display = "none";
@@ -205,10 +226,12 @@
 
                     document.getElementById("daily_hr").innerHTML = d_hours;
                     document.getElementById("daily_min").innerHTML = d_minutes;
-                } else {
+
+                } else { // when hours left = 0, format: mm:ss
                     if (d_seconds < 10) {
                         d_seconds = "0" + String(d_seconds);
-                    }
+                    } // change single digit format (1 -> 01)
+
                     document.getElementById("daily_hr").style.display = "none";
                     document.getElementById("daily_hr_unit").style.display = "none";
                     document.getElementById("daily_sec").style.display = "inline";
@@ -220,13 +243,10 @@
 
                 let weekly_reset = new Date();
                 weekly_reset.setUTCHours(0, 0, 0, 0);
-                let daysleft = ((8 - now.getUTCDay()) % 7);
-                if (daysleft == 0) {
-                    daysleft = 7;
-                }
-                weekly_reset.setUTCDate(weekly_reset.getUTCDate() + daysleft);
+                let daysleft = ((8 - now.getUTCDay()) % 7); // get days until reset day
+                weekly_reset.setUTCDate(weekly_reset.getUTCDate() + daysleft); // get next weekly reset time
 
-                let weekly_distance = weekly_reset.getTime() - now.getTime();
+                let weekly_distance = weekly_reset.getUTCTime() - now.getUTCTime();
 
                 let w_days = Math.floor(weekly_distance / (1000 * 60 * 60 * 24));
                 let w_hours = Math.floor((weekly_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -255,6 +275,7 @@
 
                     document.getElementById("weekly_day").innerHTML = w_days;
                     document.getElementById("weekly_hr").innerHTML = w_hours;
+
                 } else if (w_hours > 0) {
                     if (w_minutes < 10) {
                             w_minutes = "0" + String(w_minutes);
@@ -269,7 +290,8 @@
                     document.getElementById("weekly_sec_unit").style.display = "none";
 
                     document.getElementById("weekly_hr").innerHTML = w_hours;
-                    document.getElementById("weekly_min").innerHTML = w_minutes;                       
+                    document.getElementById("weekly_min").innerHTML = w_minutes;
+
                 } else {
                     if (w_seconds < 10) {
                             w_seconds = "0" + String(w_seconds);
@@ -291,7 +313,7 @@
                 boss_reset.setUTCHours(0, 0, 0, 0);
                 boss_reset.setUTCDate(boss_reset.getUTCDate() + ((11 - now.getUTCDay()) % 7));
 
-                let boss_distance = boss_reset.getTime() - now.getTime();
+                let boss_distance = boss_reset.getUTCTime() - now.getUTCTime();
 
                 let b_days = Math.floor(boss_distance / (1000 * 60 * 60 * 24));
                 let b_hours = Math.floor((boss_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -351,10 +373,12 @@
                     document.getElementById("boss_min").innerHTML = b_minutes;
                     document.getElementById("boss_sec").innerHTML = b_seconds;
                 }
-            }, 1000);
+            }, 1000); // repeat every second
         </script>
 
+        <!-- column 1: daily reset timer, daily quests -->
         <div class="column">
+            <!-- DAILY RESET TIMER -->
             <div class="timer">
                 <h2>
                     DAILY RESET<br>
@@ -372,8 +396,9 @@
                 </div>
             </div>
 
+            <!-- DAILY QUESTS WINDOW -->
             <div id="dailywindow" class="gamewindow">
-                <h2 class="gridhead">DAILY QUESTS</h2>
+                <h2 class="gridheader">DAILY QUESTS</h2>
                 <div id="dailyview" class="gameview">
                     <img id="npc_fairybros" class="npc fairybros" src="assets/npc/0_Fairy_Bros.png">
                     <button type="button" id="bulb_fairybros" class="questbulb fairybros" onclick="turnIn(this.id)">
@@ -451,9 +476,11 @@
             </div>
         </div>
 
+        <!-- column 2: arcane dailies, daily bosses -->
         <div class="column">
+            <!-- ARCANE RIVER DAILY QUESTS CHECKLIST -->
             <div id="arcane" class="genlist">
-                <h2 class="gridhead">ARCANE RIVER QUESTS</h2>
+                <h2 class="gridheader">ARCANE RIVER QUESTS</h2>
                 <button type="button" id="vj" onclick="checkOff(this.id)">
                     <img id="stamp_vj" class="stamp" src="assets/quest/stamp.png">
                 </button>
@@ -502,8 +529,9 @@
                 </button>
             </div>
 
+            <!-- DAILY BOSSES CHECKLIST -->
             <div id="dailyboss" class="genlist bosslist">
-                <h2 class="gridhead">DAILY BOSSES</h2>
+                <h2 class="gridheader">DAILY BOSSES</h2>
                 <button type="button" id="dzak" onclick="checkOff(this.id)">
                     <img id="stamp_dzak" class="stamp" src="assets/quest/stamp.png">
                 </button>
@@ -558,7 +586,9 @@
             </div>
         </div>
 
+        <!-- column 3: weekly reset timer, weekly quests -->
         <div class="column">
+            <!-- WEEKLY RESET TIMER -->
             <div class="timer">
                 <h2>
                     WEEKLY RESET<br>
@@ -578,8 +608,9 @@
                 </div>
             </div>
 
+            <!-- WEEKLY QUESTS WINDOW -->
             <div id="weeklywindow" class="gamewindow">
-                <h2 class="gridhead">WEEKLY QUESTS</h2>
+                <h2 class="gridheader">WEEKLY QUESTS</h2>
                 <div id="weeklyview" class="gameview">
                     <img id="npc_guild" class="npc guild" src="assets/npc/1_Deia.png">
                     <button type="button" id="bulb_guild" class="questbulb guild" onclick="turnIn(this.id)">
@@ -629,7 +660,9 @@
             </div>
         </div>
 
+        <!-- column 4: boss reset timer, weekly bosses -->
         <div class="column">
+            <!-- WEEKLY BOSS RESET TIMER -->
             <div class="timer">
                 <h2>
                     BOSS RESET<br>
@@ -648,8 +681,10 @@
                     </h2>
                 </div>
             </div>
+
+            <!-- WEEKLY BOSSES CHECKLIST -->
             <div id="weeklyboss" class="genlist bosslist">
-                <h2 class="gridhead">WEEKLY BOSSES</h2>
+                <h2 class="gridheader">WEEKLY BOSSES</h2>
                 <button type="button" id="whilla" onclick="checkOff(this.id)">
                     <img id="stamp_whilla" class="stamp" src="assets/quest/stamp.png">
                 </button>
