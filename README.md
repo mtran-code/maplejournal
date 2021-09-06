@@ -37,7 +37,7 @@ Some assets have had minor edits made to them using [Aesprite](https://www.asepr
 Maple Journal logo was created by me in Photoshop by editing the Maplestory Logo with text using Seoul Hangang font.
 
 ## Licence
-MIT Licence as per the [LICENSE.md](LICENSE.md).
+MIT Licence as per the [LICENSE](LICENSE).
 
 ## Contact
 I work on this project in my spare time, so feel free to send me comments, suggestions, anything if you want.
