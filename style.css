@@ -1,449 +1,594 @@
-
 /* fonts */
 @font-face {
-    font-family: "McLaren";
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/mclaren/v8/2EbnL-ZuAXFqZFXIeYEV8g.woff2) format("woff2");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-family: "McLaren";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/mclaren/v8/2EbnL-ZuAXFqZFXIeYEV8g.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
 @font-face {
-    font-family: "Titillium Web";
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://fonts.gstatic.com/s/titilliumweb/v10/NaPecZTIAOhVxoMyOr9n_E7fdMPmDQ.woff2) format("woff2");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-family: "Titillium Web";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/titilliumweb/v10/NaPecZTIAOhVxoMyOr9n_E7fdMPmDQ.woff2)
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
 
-/* custom cursor */ 
-* { cursor: url("assets/cursor/cursor_1.ico"), default; }
-*:active { cursor: url("assets/cursor/cursor_2.ico"), default; }
+/* custom cursor */
+* {
+  cursor: url("assets/cursor/cursor_1.ico"), default;
+}
+*:active {
+  cursor: url("assets/cursor/cursor_2.ico"), default;
+}
 
 /* general */
 body {
-    background-image: url("assets/bg/sepia-background.jpg");
-    background-color: #DBD4C2;
-    background-position: bottom;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: 100%;
+  background-image: url("assets/bg/sepia-background.jpg");
+  background-color: #dbd4c2;
+  background-position: bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-h1 { font-family: "McLaren", Helvetica, sans-serif; }
-h2 { font-family: "Titillium Web", Helvetica, sans-serif; }
+h1 {
+  font-family: "McLaren", Helvetica, sans-serif;
+}
+h2 {
+  font-family: "Titillium Web", Helvetica, sans-serif;
+}
 
 #top {
-    position: center;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 60px;
+  position: center;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 60px;
 }
 #top > button {
-    display: block;
+  display: block;
 }
 
 #main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 }
 
 .column {
-    width: fit-content;
-    position: center;
-    justify-content: center;
+  width: fit-content;
+  position: center;
+  justify-content: center;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 /* countdown timers */
 .timer {
-    display: flex;
-    flex-flow: row;
-    height: 90px;
-    width: 332px;
-    padding-left: 12px;
-    padding-right: 0px;
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-bottom: 30px;
+  display: flex;
+  flex-flow: row;
+  height: 90px;
+  width: 332px;
+  padding-left: 12px;
+  padding-right: 0px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 30px;
 
-    position: center;
-    background-color: rgb(100, 100, 100);
-    box-shadow: 
-        rgba(0, 0, 0, 0.17) 0px 23px 25px 0px inset,
-        rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset, 
-        rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
-        rgba(255, 255, 255, 0.9) 0px 5px 5px 0px inset;
-    border: 3px solid rgb(50, 50, 50);
-    border-radius: 10px;
-    justify-content: left;
-    align-items: flex-start;
+  position: center;
+  background-color: rgb(100, 100, 100);
+  box-shadow: rgba(0, 0, 0, 0.17) 0px 23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
+    rgba(255, 255, 255, 0.9) 0px 5px 5px 0px inset;
+  border: 3px solid rgb(50, 50, 50);
+  border-radius: 10px;
+  justify-content: left;
+  align-items: flex-start;
 }
 .timer > h2 {
-    color: rgb(248, 248, 248);
-    font-size: small;
+  color: rgb(248, 248, 248);
+  font-size: small;
 }
-.timebox{
-    height: 74px;
-    width: 210px;
-    background-color: rgb(80, 80, 80);
-    box-shadow: 
-        rgba(0, 0, 0, 0.27) 0px 23px 25px 0px inset,
-        rgba(0, 0, 0, 0.25) 0px 36px 30px 0px inset, 
-        rgba(0, 0, 0, 0.2) 0px 79px 40px 0px inset,
-        rgba(0, 0, 0, 0.4) -1px -1px 3px 0px,
-        rgba(255, 255, 255, 0.4) 1px 1px 3px 0px;
-    border-style: inset;
-    border-color: rgb(200, 200, 200);
-    border-width: 1px 0px 0px 1px;
-    border-radius: 8px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-left: auto;
-    margin-right: 8px;
-    padding-right: 10px;
-    justify-self: right;
-    align-self: center;
+.timebox {
+  height: 74px;
+  width: 210px;
+  background-color: rgb(80, 80, 80);
+  box-shadow: rgba(0, 0, 0, 0.27) 0px 23px 25px 0px inset,
+    rgba(0, 0, 0, 0.25) 0px 36px 30px 0px inset,
+    rgba(0, 0, 0, 0.2) 0px 79px 40px 0px inset,
+    rgba(0, 0, 0, 0.4) -1px -1px 3px 0px,
+    rgba(255, 255, 255, 0.4) 1px 1px 3px 0px;
+  border-style: inset;
+  border-color: rgb(200, 200, 200);
+  border-width: 1px 0px 0px 1px;
+  border-radius: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  margin-right: 8px;
+  padding-right: 10px;
+  justify-self: right;
+  align-self: center;
 }
 .timebox > h2 {
-    white-space: nowrap;
-    overflow: visible;
-    color: rgb(250, 250, 250);
-    font-size: 3.5em;
-    margin-top: -5px;
-    margin-bottom: auto;
-    text-align: right;
-    vertical-align: middle;
+  white-space: nowrap;
+  overflow: visible;
+  color: rgb(250, 250, 250);
+  font-size: 3.5em;
+  margin-top: -5px;
+  margin-bottom: auto;
+  text-align: right;
+  vertical-align: middle;
 }
 .timeunit {
-    font-family: "Titillium Web";
-    font-size: small;
+  font-family: "Titillium Web";
+  font-size: small;
 }
 
 /* boss, arcane checklists*/
 .genlist {
-    display: grid;
-    grid-gap: 10px;
-    padding: 15px 15px 25px;
-    height: fit-content;
-    width: 314px;
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-bottom: 50px;
+  display: grid;
+  grid-gap: 10px;
+  padding: 15px 15px 25px;
+  height: fit-content;
+  width: 314px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 50px;
 
-    position: center;
-    background-color: gray;
-    box-shadow: 
-        rgba(0, 0, 0, 0.17) 0px 23px 25px 0px inset,
-        rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset, 
-        rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
-        rgba(255, 255, 255, 0.9) 0px 5px 5px 0px inset;
-    border: 3px solid rgb(50, 50, 50);
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
+  position: center;
+  background-color: gray;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px 23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
+    rgba(255, 255, 255, 0.9) 0px 5px 5px 0px inset;
+  border: 3px solid rgb(50, 50, 50);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
 }
 .genlist > button {
-    color: white;
-    background-color: black;
-    background-repeat: no-repeat;
-    padding: 1px 0px 1px 0px;
-    border: none;
-    text-align: center;
-    vertical-align: middle;
-    z-index: 1;
+  color: white;
+  background-color: black;
+  background-repeat: no-repeat;
+  padding: 1px 0px 1px 0px;
+  border: none;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 1;
 }
 .genlist > button:hover {
-    background-color: white;
-    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+  background-color: white;
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
 }
 .genlist > button > img {
-    text-align: center;
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2px;
-    -webkit-user-drag: none;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2px;
+  -webkit-user-drag: none;
 }
 .gridheader {
-    color: rgb(250, 250, 250);
-    grid-column: 1 / -1;
-    text-align: center;
-    vertical-align: top;
-    margin-top: 15px;
-    margin-bottom: 15px;
+  color: rgb(250, 250, 250);
+  grid-column: 1 / -1;
+  text-align: center;
+  vertical-align: top;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-#dailyboss { grid-template: 40px 66px 66px 66px 66px / 66px 66px 66px 66px; }
-#weeklyboss { grid-template: 40px 66px 66px 66px 66px 66px / 66px 66px 66px 66px; }
+#dailyboss {
+  grid-template: 40px 66px 66px 66px 66px / 66px 66px 66px 66px;
+}
+#weeklyboss {
+  grid-template: 40px 66px 66px 66px 66px 66px / 66px 66px 66px 66px;
+}
 .bosslist > button {
-    height: 67px;
-    width: 66px;
-    background-position: 0px 1px;
-    border-radius: 6px;
+  height: 67px;
+  width: 66px;
+  background-position: 0px 1px;
+  border-radius: 6px;
 }
 
-#dzak { background-image: url("assets/bossicon/Zakum.png"); }
-#dmag { background-image: url("assets/bossicon/Magnus.png"); }
-#dhilla { background-image: url("assets/bossicon/Hilla.png"); }
-#dht { background-image: url("assets/bossicon/Horntail.png"); }
-#dpap { background-image: url("assets/bossicon/Papulatus.png"); }
-#dvl { background-image: url("assets/bossicon/Von_Leon.png"); }
-#dark { background-image: url("assets/bossicon/Arkarium.png"); }
-#dpb { background-image: url("assets/bossicon/Pink_Bean.png"); }
-#dpierre { background-image: url("assets/bossicon/Pierre.png"); }
-#dvb { background-image: url("assets/bossicon/Von_Bon.png"); }
-#dcqueen { background-image: url("assets/bossicon/Crimson_Queen.png"); }
-#dvell { background-image: url("assets/bossicon/Vellum.png"); }
-#dranmaru { background-image: url("assets/bossicon/Mori_Ranmaru.png"); }
-#domnicln { background-image: url("assets/bossicon/OMNI_CLN.png"); }
-#djulietta { background-image: url("assets/bossicon/Julietta.png"); }
-#dgollux { background-image: url("assets/bossicon/Gollux.png"); }
+#dzak {
+  background-image: url("assets/bossicon/Zakum.png");
+}
+#dmag {
+  background-image: url("assets/bossicon/Magnus.png");
+}
+#dhilla {
+  background-image: url("assets/bossicon/Hilla.png");
+}
+#dht {
+  background-image: url("assets/bossicon/Horntail.png");
+}
+#dpap {
+  background-image: url("assets/bossicon/Papulatus.png");
+}
+#dvl {
+  background-image: url("assets/bossicon/Von_Leon.png");
+}
+#dark {
+  background-image: url("assets/bossicon/Arkarium.png");
+}
+#dpb {
+  background-image: url("assets/bossicon/Pink_Bean.png");
+}
+#dpierre {
+  background-image: url("assets/bossicon/Pierre.png");
+}
+#dvb {
+  background-image: url("assets/bossicon/Von_Bon.png");
+}
+#dcqueen {
+  background-image: url("assets/bossicon/Crimson_Queen.png");
+}
+#dvell {
+  background-image: url("assets/bossicon/Vellum.png");
+}
+#dranmaru {
+  background-image: url("assets/bossicon/Mori_Ranmaru.png");
+}
+#domnicln {
+  background-image: url("assets/bossicon/OMNI_CLN.png");
+}
+#djulietta {
+  background-image: url("assets/bossicon/Julietta.png");
+}
+#dgollux {
+  background-image: url("assets/bossicon/Gollux.png");
+}
 
-#whilla { background-image: url("assets/bossicon/Hilla.png"); }
-#wpb { background-image: url("assets/bossicon/Pink_Bean.png"); }
-#wcyg { background-image: url("assets/bossicon/Cygnus.png"); }
-#wzak { background-image: url("assets/bossicon/Zakum.png"); }
-#wpierre { background-image: url("assets/bossicon/Pierre.png"); }
-#wvb { background-image: url("assets/bossicon/Von_Bon.png"); }
-#wcqueen { background-image: url("assets/bossicon/Crimson_Queen.png"); }
-#wvell { background-image: url("assets/bossicon/Vellum.png"); }
-#wpno { background-image: url("assets/bossicon/Princess_No.png"); }
-#wmag { background-image: url("assets/bossicon/Magnus.png"); }
-#wpap { background-image: url("assets/bossicon/Papulatus.png"); }
-#wakechi { background-image: url("assets/bossicon/Akechi_Mitsuhide.png"); }
-#wlotus { background-image: url("assets/bossicon/Lotus.png"); }
-#wdamien { background-image: url("assets/bossicon/Damien.png"); }
-#wlucid { background-image: url("assets/bossicon/Lucid.png"); }
-#wwill { background-image: url("assets/bossicon/Will.png"); }
-#wgloom { background-image: url("assets/bossicon/Gloom.png"); }
-#wdnell { background-image: url("assets/bossicon/Guard_Captain_Darknell.png"); }
-#wvhilla { background-image: url("assets/bossicon/Verus_Hilla.png"); }
-#wseren { background-image: url("assets/bossicon/Seren.png"); }
+#whilla {
+  background-image: url("assets/bossicon/Hilla.png");
+}
+#wpb {
+  background-image: url("assets/bossicon/Pink_Bean.png");
+}
+#wcyg {
+  background-image: url("assets/bossicon/Cygnus.png");
+}
+#wzak {
+  background-image: url("assets/bossicon/Zakum.png");
+}
+#wpierre {
+  background-image: url("assets/bossicon/Pierre.png");
+}
+#wvb {
+  background-image: url("assets/bossicon/Von_Bon.png");
+}
+#wcqueen {
+  background-image: url("assets/bossicon/Crimson_Queen.png");
+}
+#wvell {
+  background-image: url("assets/bossicon/Vellum.png");
+}
+#wpno {
+  background-image: url("assets/bossicon/Princess_No.png");
+}
+#wmag {
+  background-image: url("assets/bossicon/Magnus.png");
+}
+#wpap {
+  background-image: url("assets/bossicon/Papulatus.png");
+}
+#wakechi {
+  background-image: url("assets/bossicon/Akechi_Mitsuhide.png");
+}
+#wlotus {
+  background-image: url("assets/bossicon/Lotus.png");
+}
+#wdamien {
+  background-image: url("assets/bossicon/Damien.png");
+}
+#wlucid {
+  background-image: url("assets/bossicon/Lucid.png");
+}
+#wwill {
+  background-image: url("assets/bossicon/Will.png");
+}
+#wgloom {
+  background-image: url("assets/bossicon/Gloom.png");
+}
+#wdnell {
+  background-image: url("assets/bossicon/Guard_Captain_Darknell.png");
+}
+#wvhilla {
+  background-image: url("assets/bossicon/Verus_Hilla.png");
+}
+#wseren {
+  background-image: url("assets/bossicon/Seren.png");
+}
 
-.checked { opacity: 0.3; }
-.stamp { opacity: 0; }
+.checked {
+  opacity: 0.3;
+}
+.stamp {
+  opacity: 0;
+}
 
-#arcane { grid-template: 40px 73px / 121px 33px 121px; }
+#arcane {
+  grid-template: 40px 73px / 121px 33px 121px;
+}
 #arcane > button {
-    height: 73px;
-    width: 121px;
-    background-position: 1px 1px;
-    border-radius: 10px;
+  height: 73px;
+  width: 121px;
+  background-position: 1px 1px;
+  border-radius: 10px;
 }
 
-#vj { background-image: url("assets/arcane/Vanishing_Journey.png"); }
-#vjpq { background-image: url("assets/arcane/Vanishing_Journey_Erda_Spectrum.png"); }
-#chuchu { background-image: url("assets/arcane/Chu_Chu_Island.png"); }
-#chuchupq { background-image: url("assets/arcane/Chu_Chu_Island_Hungry_Muto.png"); }
-#lach { background-image: url("assets/arcane/Lachelein.png"); }
-#lachpq { background-image: url("assets/arcane/Lachelein_Dream_Defender.png"); }
-#arcana { background-image: url("assets/arcane/Arcana.png"); }
-#arcanapq { background-image: url("assets/arcane/Arcana_Spirit_Savior.png"); }
-#morass { background-image: url("assets/arcane/Morass.png"); }
-#morasspq { opacity: 0.1;}
-#esfera {background-image: url("assets/arcane/Esfera.png");}
-#esferapq { opacity: 0.1; }
+#vj {
+  background-image: url("assets/arcane/Vanishing_Journey.png");
+}
+#vjpq {
+  background-image: url("assets/arcane/Vanishing_Journey_Erda_Spectrum.png");
+}
+#chuchu {
+  background-image: url("assets/arcane/Chu_Chu_Island.png");
+}
+#chuchupq {
+  background-image: url("assets/arcane/Chu_Chu_Island_Hungry_Muto.png");
+}
+#lach {
+  background-image: url("assets/arcane/Lachelein.png");
+}
+#lachpq {
+  background-image: url("assets/arcane/Lachelein_Dream_Defender.png");
+}
+#arcana {
+  background-image: url("assets/arcane/Arcana.png");
+}
+#arcanapq {
+  background-image: url("assets/arcane/Arcana_Spirit_Savior.png");
+}
+#morass {
+  background-image: url("assets/arcane/Morass.png");
+}
+#morasspq {
+  opacity: 0.1;
+}
+#esfera {
+  background-image: url("assets/arcane/Esfera.png");
+}
+#esferapq {
+  opacity: 0.1;
+}
 
 /* daily/weekly quest window */
 .gamewindow {
-    height: fit-content;
-    width: 344px;
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-bottom: 50px;
+  height: fit-content;
+  width: 344px;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 50px;
 
-    position: center;
-    background-color: gray;
-    box-shadow: 
-        rgba(0, 0, 0, 0.17) 0px 23px 25px 0px inset,
-        rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset, 
-        rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
-        rgba(255, 255, 255, 0.9) 0px 5px 5px 0px inset;
-    border: 3px solid rgb(50, 50, 50);
-    border-radius: 10px;
-    justify-content: center;
+  position: center;
+  background-color: gray;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px 23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
+    rgba(255, 255, 255, 0.9) 0px 5px 5px 0px inset;
+  border: 3px solid rgb(50, 50, 50);
+  border-radius: 10px;
+  justify-content: center;
 }
 .gameview {
-    display: grid;
-    width: 320px;
-    position: center;
-    background-color: gray;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    box-shadow: 
-        rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset, 
-        rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
-        rgba(255, 255, 255, 0.4) 0px 0px 5px 0px;
-    border: 2px solid rgb(70, 70, 70);
-    border-radius: 10px;
-    justify-content: left;
-    align-items:flex-end;
+  display: grid;
+  width: 320px;
+  position: center;
+  background-color: gray;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
+    rgba(255, 255, 255, 0.4) 0px 0px 5px 0px;
+  border: 2px solid rgb(70, 70, 70);
+  border-radius: 10px;
+  justify-content: left;
+  align-items: flex-end;
 }
 #dailyview {
-    height: 750px;
-    background-image: url("assets/bg/platform_0.png");
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 180px 180px 180px 180px;
-    grid-template-areas:
-        "one two"
-        "three four"
-        "five six"
-        "seven eight";
+  height: 750px;
+  background-image: url("assets/bg/platform_0.png");
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 180px 180px 180px 180px;
+  grid-template-areas:
+    "one two"
+    "three four"
+    "five six"
+    "seven eight";
 }
 #weeklyview {
-    height: 480px;
-    background-image: url("assets/bg/platform_1.png");
-    grid-template-columns: 53px 53px 53px 53px 53px 53px;
-    grid-template-rows: 240px 240px;
-    grid-template-areas:
-        "one one one two two two"
-        "three three four four five five";
+  height: 480px;
+  background-image: url("assets/bg/platform_1.png");
+  grid-template-columns: 53px 53px 53px 53px 53px 53px;
+  grid-template-rows: 240px 240px;
+  grid-template-areas:
+    "one one one two two two"
+    "three three four four five five";
 }
 .npc {
-    position: relative;
-    margin-top: 1px;
-    margin-left: auto;
-    margin-right: auto;
+  position: relative;
+  margin-top: 1px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .questbulb {
-    position: relative;
-    background-color: transparent;
-    background-image: url("assets/quest/quest_pending.gif");
-    height: 44px;
-    width: 44px;
-    border: none;
-    text-align: center;
-    vertical-align: middle;
+  position: relative;
+  background-color: transparent;
+  background-image: url("assets/quest/quest_pending.gif");
+  height: 44px;
+  width: 44px;
+  border: none;
+  text-align: center;
+  vertical-align: middle;
 }
 #dailyview > .questbulb {
-    top: -125px;
-    left: 80px;
+  top: -125px;
+  left: 80px;
 }
 #weeklyview > .questbulb {
-    position: relative;
-    top: -145px;
-    left: 50px;
+  position: relative;
+  top: -145px;
+  left: 50px;
 }
-#weeklyview > #bulb_guild, #weeklyview > #bulb_dojo {
-    position: relative;
-    top: -135px;
-    left: 80px;
+#weeklyview > #bulb_guild,
+#weeklyview > #bulb_dojo {
+  position: relative;
+  top: -135px;
+  left: 80px;
 }
 .questbulb > img {
-    position: relative;
-    max-height: 25px;
-    max-width: 28px;
-    top: -3px;
-    left: -2px;
+  position: relative;
+  max-height: 25px;
+  max-width: 28px;
+  top: -3px;
+  left: -2px;
 }
-.questbulb:hover img { top: -1px; }
+.questbulb:hover img {
+  top: -1px;
+}
 .turnedin {
-    background-image: url("assets/quest/quest_complete.png");
-    opacity: 0.3;
+  background-image: url("assets/quest/quest_complete.png");
+  opacity: 0.3;
 }
-.turnedin > img { opacity: 0; }
+.turnedin > img {
+  opacity: 0;
+}
 
-.fairybros { grid-area: one; }
-.legion { grid-area: two; }
-.ursus { grid-area: three; }
-.mapletour { grid-area: four; }
-.commerci { grid-area: five; }
-.monsterpark { grid-area: six; }
-.yugarden { grid-area: seven; }
-.phantomforest { grid-area: eight; }
+.fairybros {
+  grid-area: one;
+}
+.legion {
+  grid-area: two;
+}
+.ursus {
+  grid-area: three;
+}
+.mapletour {
+  grid-area: four;
+}
+.commerci {
+  grid-area: five;
+}
+.monsterpark {
+  grid-area: six;
+}
+.yugarden {
+  grid-area: seven;
+}
+.phantomforest {
+  grid-area: eight;
+}
 
-.guild { grid-area: one; }
-.dojo { grid-area: two; }
-.scrapyard { grid-area: three; }
-.worldtree { grid-area: four; }
-.kritias { grid-area: five; }
+.guild {
+  grid-area: one;
+}
+.dojo {
+  grid-area: two;
+}
+.scrapyard {
+  grid-area: three;
+}
+.worldtree {
+  grid-area: four;
+}
+.kritias {
+  grid-area: five;
+}
 
 #npc_fairybros {
-    top: -44px;
-    left: -13px;
+  top: -44px;
+  left: -13px;
 }
 #npc_legion {
-    top: -43px;
-    left: -2px;
+  top: -43px;
+  left: -2px;
 }
 #npc_ursus {
-    top: -44px;
-    left: 0px;
+  top: -44px;
+  left: 0px;
 }
 #npc_mapletour {
-    top: -45px;
-    left: -5px;
+  top: -45px;
+  left: -5px;
 }
 #npc_commerci {
-    top: -44px;
-    left: -8px;
+  top: -44px;
+  left: -8px;
 }
 #npc_monsterpark {
-    top: -45px;
-    left: -21px;
+  top: -45px;
+  left: -21px;
 }
-#npc_yugarden{
-    top: -45px;
-    left: -7px;
+#npc_yugarden {
+  top: -45px;
+  left: -7px;
 }
 #npc_phantomforest {
-    top: -41px;
-    left: -29px;
+  top: -41px;
+  left: -29px;
 }
 
 #npc_guild {
-    top: -50px;
-    left: -10px;
+  top: -50px;
+  left: -10px;
 }
 #npc_dojo {
-    top: -50px;
-    left: -10px;
+  top: -50px;
+  left: -10px;
 }
 #npc_scrapyard {
-    top: -50px;
-    left: -10px;
+  top: -50px;
+  left: -10px;
 }
 #npc_worldtree {
-    top: -50px;
-    left: -10px;
+  top: -50px;
+  left: -10px;
 }
 #npc_kritias {
-    top: -47px;
-    left: -10px;
+  top: -47px;
+  left: -10px;
 }
 
 .caption {
-    position: relative;
-    font-family: "Arial";
-    font-weight: 100;
-    font-size: 14;
-    color: palegoldenrod;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: max-content;
-    border-radius: 3px;
-    padding-top: 2px;
-    padding-right: 2px;
-    padding-left: 2px;
-    padding-bottom: 1px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 1px;
-    margin-bottom: 1px;
-    text-align: center;
+  position: relative;
+  font-family: "Arial";
+  font-weight: 100;
+  font-size: 14;
+  color: palegoldenrod;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: max-content;
+  border-radius: 3px;
+  padding-top: 2px;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 1px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  text-align: center;
 }
 #dailyview .caption {
-    top: 4px;
-    left: -5px;
+  top: 4px;
+  left: -5px;
 }
 #weeklyview .caption {
-    top: -2px;
-    left: -10px;
+  top: -2px;
+  left: -10px;
 }
