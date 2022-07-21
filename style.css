@@ -592,3 +592,11 @@ h2 {
   top: -2px;
   left: -10px;
 }
+
+/* DEV */
+#showDev {
+  position: absolute;
+}
+#devButtons {
+  display: none;
+}
