@@ -27,8 +27,12 @@ Hi, I'm just a university student who plays [MapleStory](https://maplestory.nexo
 - Scrapyard and Dark World Tree
 - Kritias
 
-## To be Implemented
+## To be Implemented / Ideas
 - store info in browser so it won't reset on page reload
+- allow checklist items to be disabled
+- option to add personal to-do items
+- a way to save your settings
+- neat reset animation
 
 ## Assets
 All MapleStory assets were taken from the game, and I have no ownership over them.
