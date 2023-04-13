@@ -8,6 +8,8 @@
 
 Hi, I'm just a university student who plays [MapleStory](https://maplestory.nexon.net/) sometimes. I made this to keep track of things I need to do and to practice my website coding.
 
+[Currently not updating this project anymore.]
+
 ## Included in website
 
 ### Dailies
@@ -46,6 +48,6 @@ MIT Licence as per the [LICENSE](LICENSE).
 ## Contact
 I work on this project in my spare time, so feel free to send me comments, suggestions, anything if you want.
 
-Discord: minte#7954
+Discord: mint#1971
 
 IGN: MintAran on Reboot
