@@ -3,63 +3,75 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-var buffer = 0; // used in checkOff function
+// Encapsulate buffer variable in a function to create a closure
+function createCheckOffFunction() {
+    var buffer = 0; // used in checkOff function
+    return function checkOff(elid, skipAnimation = false) {
+        const element = document.getElementById(elid);
+        const image = document.getElementById("stamp_" + elid);
+        const newState = !element.classList.contains("checked");
+        storeButtonState(elid, newState);
 
-function checkOff(elid) {
-    let element = document.getElementById(elid);
-    let image = document.getElementById("stamp_" + elid);
+        // if button is already stamped, reset it to unstamped and exit
+        if (element.classList.contains("checked")) {
+            resetButton(elid);
+            return;
+        }
 
-    // if button is already stamped, reset it to unstamped
-    if (element.classList.contains("checked")) {
-        resetButton(elid);
-    }
-    // if button is not stamped, stamp it
-    else {
-        element.classList.toggle("checked");
+        // if button is not stamped, stamp it
+        element.classList.add("checked");
         image.style.opacity = 1;
 
         // ====== STAMP ANIMATION CODE ======
+        if (skipAnimation) {
+            return;
+        }
 
         let theta = getRndInteger(-60, 60) * Math.PI / 180; // randomly rotate stamp by theta radians
+
         let newAnim = document.createElement("style");
-        // buffer: store up to 5 numbered animations at once
-        buffer += 1;
-        if (buffer > 5) {
-            buffer = 1;
-        }
-        newAnim.id = "anim" + buffer;
-        if (document.getElementById(newAnim.id)) { // overwrite older animations from buffer
-            document.head.removeChild(document.getElementById(newAnim.id));
-        }
         // insert animation css
-        newAnim.innerHTML = "\
-            .stampInAnim" + buffer + " {\
-                animation: stampInAnim" + buffer + " 150ms forwards;\
-                opacity: 1;\
-            }\
-            @keyframes stampInAnim" + buffer + " {\
-                0% {\
-                    transform: matrix(1.5, 0, 0, 1.5, 0, -32);\
-                    opacity: 0;\
-                }\
-                100% {\
-                    transform: matrix(" + Math.cos(theta) + ", " + Math.sin(theta) + ", " + Math.sin(theta) * -1 + ", " + Math.cos(theta) + ", 0, 0);\
-                    opacity: 1;\
-                }\
-            }\
-        "
-        document.head.appendChild(newAnim);
-        image.classList.remove(...image.classList); // clear residual classes
-        void image.offsetWidth;
-        image.classList.add("stampInAnim" + buffer);
-        image.addEventListener("animationend",
-            function () {
-                image.classList.remove("stampInAnim" + buffer);
-                image.style.transform = "matrix(" + Math.cos(theta) + ", " + Math.sin(theta) + ", " + Math.sin(theta) * -1 + ", " + Math.cos(theta) + ", 0, 0)";
+        newAnim.innerHTML = `
+        .stampInAnim${buffer} {
+            animation: stampInAnim${buffer} 150ms forwards;
+            opacity: 1;
+        }
+        @keyframes stampInAnim${buffer} {
+            0% {
+                transform: matrix(1.5, 0, 0, 1.5, 0, -32);
+                opacity: 0;
             }
-        ) // set static image after animation ends
-    }
+            100% {
+                transform: matrix(${Math.cos(theta)}, ${Math.sin(theta)}, ${Math.sin(theta) * -1}, ${Math.cos(theta)}, 0, 0);
+                opacity: 1;
+            }
+        }
+        `;
+        // Remove older animations from the buffer
+        if (document.getElementById(`anim${buffer}`)) {
+            document.head.removeChild(document.getElementById(`anim${buffer}`));
+        }
+
+        // Add the animation style element to the document head
+        document.head.appendChild(newAnim);
+
+        // Apply the animation class to the image
+        image.classList.remove(...image.classList); // Clear residual classes
+        void image.offsetWidth;
+        image.classList.add(`stampInAnim${buffer}`);
+
+        // Listen for the animationend event to set static image after animation ends
+        image.addEventListener("animationend", function () {
+            image.classList.remove(`stampInAnim${buffer}`);
+            image.style.transform = `matrix(${Math.cos(theta)}, ${Math.sin(theta)}, ${Math.sin(theta) * -1}, ${Math.cos(theta)}, 0, 0)`;
+        });
+
+        // Increment the buffer value
+        buffer = (buffer + 1) % 30; // Limit buffer to values 0-5
+    };
 }
+// Use function
+var checkOff = createCheckOffFunction();
 
 // toggle quest bulb completion
 function turnIn(elid) {
@@ -70,9 +82,5 @@ function turnIn(elid) {
 // toggle dev buttons
 function showDev() {
     let element = document.getElementById("devButtons");
-    if (element.style.display === "block") {
-        element.style.display = "none";
-    } else {
-        element.style.display = "block";
-    }
+    element.style.display = (element.style.display === "block") ? "none" : "block";
 }

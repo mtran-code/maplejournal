@@ -1,5 +1,5 @@
 // ====== COUNTDOWN TIMER CODE ======
-setInterval(function () {
+function updateTimers() {
     let now = new Date(); // get current time
 
     let daily_reset = new Date();
@@ -190,4 +190,8 @@ setInterval(function () {
         document.getElementById("boss_min").innerHTML = b_minutes;
         document.getElementById("boss_sec").innerHTML = b_seconds;
     }
-}, 1000); // repeat every second
+    console.log("updated");
+}
+
+updateTimers(); // run once on page load
+setInterval(updateTimers, 1000); // repeat every second

@@ -3,18 +3,17 @@
   font-family: "McLaren";
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/mclaren/v8/2EbnL-ZuAXFqZFXIeYEV8g.woff2)
-    format("woff2");
+  src: url(https://fonts.gstatic.com/s/mclaren/v8/2EbnL-ZuAXFqZFXIeYEV8g.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
 }
+
 @font-face {
   font-family: "Titillium Web";
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/titilliumweb/v10/NaPecZTIAOhVxoMyOr9n_E7fdMPmDQ.woff2)
-    format("woff2");
+  src: url(https://fonts.gstatic.com/s/titilliumweb/v10/NaPecZTIAOhVxoMyOr9n_E7fdMPmDQ.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
@@ -24,6 +23,7 @@
 * {
   cursor: url("assets/cursor/cursor_1.ico"), default;
 }
+
 *:active {
   cursor: url("assets/cursor/cursor_2.ico"), default;
 }
@@ -41,17 +41,19 @@ body {
 h1 {
   font-family: "McLaren", Helvetica, sans-serif;
 }
+
 h2 {
   font-family: "Titillium Web", Helvetica, sans-serif;
 }
 
-#top {
+header {
   position: center;
   text-align: center;
   margin-top: 40px;
   margin-bottom: 60px;
 }
-#top > button {
+
+header>button {
   display: block;
 }
 
@@ -95,10 +97,12 @@ h2 {
   justify-content: left;
   align-items: flex-start;
 }
-.timer > h2 {
+
+.timer>h2 {
   color: rgb(248, 248, 248);
   font-size: small;
 }
+
 .timebox {
   height: 74px;
   width: 210px;
@@ -120,7 +124,8 @@ h2 {
   justify-self: right;
   align-self: center;
 }
-.timebox > h2 {
+
+.timebox>h2 {
   white-space: nowrap;
   overflow: visible;
   color: rgb(250, 250, 250);
@@ -130,6 +135,7 @@ h2 {
   text-align: right;
   vertical-align: middle;
 }
+
 .timeunit {
   font-family: "Titillium Web";
   font-size: small;
@@ -157,7 +163,8 @@ h2 {
   justify-content: center;
   align-items: center;
 }
-.genlist > button {
+
+.genlist>button {
   color: white;
   background-color: black;
   background-repeat: no-repeat;
@@ -166,12 +173,15 @@ h2 {
   text-align: center;
   vertical-align: middle;
   z-index: 1;
+  image-rendering: pixelated;
 }
-.genlist > button:hover {
+
+.genlist>button:hover {
   background-color: white;
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
 }
-.genlist > button > img {
+
+.genlist>button>img {
   text-align: center;
   vertical-align: middle;
   margin-left: auto;
@@ -179,6 +189,7 @@ h2 {
   margin-top: 2px;
   -webkit-user-drag: none;
 }
+
 .gridheader {
   color: rgb(250, 250, 250);
   grid-column: 1 / -1;
@@ -191,178 +202,249 @@ h2 {
 #dailyboss {
   grid-template: 40px 66px 66px 66px 66px / 66px 66px 66px 66px;
 }
+
 #weeklyboss {
-  grid-template: 40px 66px 66px 66px 66px 66px / 66px 66px 66px 66px;
+  grid-template: 40px 66px 66px 66px 66px 66px 66px / 66px 66px 66px 66px;
 }
-.bosslist > button {
+
+.bosslist>button {
   height: 67px;
   width: 66px;
   background-position: 0px 1px;
   border-radius: 6px;
+  image-rendering: pixelated;
 }
 
-#dzak {
+#daily_zak {
   background-image: url("assets/bossicon/Zakum.png");
 }
-#dmag {
+
+#daily_mag {
   background-image: url("assets/bossicon/Magnus.png");
 }
-#dhilla {
+
+#daily_hilla {
   background-image: url("assets/bossicon/Hilla.png");
 }
-#dht {
+
+#daily_ht {
   background-image: url("assets/bossicon/Horntail.png");
 }
-#dpap {
+
+#daily_pap {
   background-image: url("assets/bossicon/Papulatus.png");
 }
-#dvl {
+
+#daily_vl {
   background-image: url("assets/bossicon/Von_Leon.png");
 }
-#dark {
+
+#daily_ark {
   background-image: url("assets/bossicon/Arkarium.png");
 }
-#dpb {
+
+#daily_pb {
   background-image: url("assets/bossicon/Pink_Bean.png");
 }
-#dpierre {
+
+#daily_pierre {
   background-image: url("assets/bossicon/Pierre.png");
 }
-#dvb {
+
+#daily_vb {
   background-image: url("assets/bossicon/Von_Bon.png");
 }
-#dcqueen {
+
+#daily_cqueen {
   background-image: url("assets/bossicon/Crimson_Queen.png");
 }
-#dvell {
+
+#daily_vell {
   background-image: url("assets/bossicon/Vellum.png");
 }
-#dranmaru {
+
+#daily_ranmaru {
   background-image: url("assets/bossicon/Mori_Ranmaru.png");
 }
-#domnicln {
+
+#daily_omnicln {
   background-image: url("assets/bossicon/OMNI_CLN.png");
 }
-#djulietta {
+
+#daily_julietta {
   background-image: url("assets/bossicon/Julietta.png");
 }
-#dgollux {
+
+#daily_gollux {
   background-image: url("assets/bossicon/Gollux.png");
 }
 
-#whilla {
+#weekly_hilla {
   background-image: url("assets/bossicon/Hilla.png");
 }
-#wpb {
+
+#weekly_pb {
   background-image: url("assets/bossicon/Pink_Bean.png");
 }
-#wcyg {
+
+#weekly_cyg {
   background-image: url("assets/bossicon/Cygnus.png");
 }
-#wzak {
+
+#weekly_zak {
   background-image: url("assets/bossicon/Zakum.png");
 }
-#wpierre {
+
+#weekly_pierre {
   background-image: url("assets/bossicon/Pierre.png");
 }
-#wvb {
+
+#weekly_vb {
   background-image: url("assets/bossicon/Von_Bon.png");
 }
-#wcqueen {
+
+#weekly_cqueen {
   background-image: url("assets/bossicon/Crimson_Queen.png");
 }
-#wvell {
+
+#weekly_vell {
   background-image: url("assets/bossicon/Vellum.png");
 }
-#wpno {
+
+#weekly_pno {
   background-image: url("assets/bossicon/Princess_No.png");
 }
-#wmag {
+
+#weekly_mag {
   background-image: url("assets/bossicon/Magnus.png");
 }
-#wpap {
+
+#weekly_pap {
   background-image: url("assets/bossicon/Papulatus.png");
 }
-#wakechi {
+
+#weekly_akechi {
   background-image: url("assets/bossicon/Akechi_Mitsuhide.png");
 }
-#wlotus {
+
+#weekly_lotus {
   background-image: url("assets/bossicon/Lotus.png");
 }
-#wdamien {
+
+#weekly_damien {
   background-image: url("assets/bossicon/Damien.png");
 }
-#wlucid {
+
+#weekly_slime {
+  background-image: url("assets/bossicon/Guardian_Angel_Slime.png");
+}
+
+#weekly_lucid {
   background-image: url("assets/bossicon/Lucid.png");
 }
-#wwill {
+
+#weekly_will {
   background-image: url("assets/bossicon/Will.png");
 }
-#wgloom {
+
+#weekly_gloom {
   background-image: url("assets/bossicon/Gloom.png");
 }
-#wdnell {
+
+#weekly_dnell {
   background-image: url("assets/bossicon/Guard_Captain_Darknell.png");
 }
-#wvhilla {
+
+#weekly_vhilla {
   background-image: url("assets/bossicon/Verus_Hilla.png");
 }
-#wseren {
+
+#weekly_seren {
   background-image: url("assets/bossicon/Seren.png");
+}
+
+#weekly_kalos {
+  background-image: url("assets/bossicon/Kalos_the_Guardian.png");
+}
+
+#weekly_kaling {
+  background-image: url("assets/bossicon/Kaling.png");
+}
+
+#weekly_bmage {
+  background-image: url("assets/bossicon/Black_Mage.png");
 }
 
 .checked {
   opacity: 0.3;
 }
+
 .stamp {
   opacity: 0;
+}
+
+.arcane_symbol {
+  image-rendering: pixelated;
 }
 
 #arcane {
   grid-template: 40px 73px / 121px 33px 121px;
 }
-#arcane > button {
+
+#arcane>button {
   height: 73px;
   width: 121px;
   background-position: 1px 1px;
   border-radius: 10px;
+  image-rendering: pixelated;
 }
 
-#vj {
+#arcane_vj1 {
   background-image: url("assets/arcane/Vanishing_Journey.png");
 }
-#vjpq {
+
+#arcane_vj2 {
   background-image: url("assets/arcane/Vanishing_Journey_Erda_Spectrum.png");
 }
-#chuchu {
+
+#arcane_chuchu1 {
   background-image: url("assets/arcane/Chu_Chu_Island.png");
 }
-#chuchupq {
+
+#arcane_chuchu2 {
   background-image: url("assets/arcane/Chu_Chu_Island_Hungry_Muto.png");
 }
-#lach {
+
+#arcane_lach1 {
   background-image: url("assets/arcane/Lachelein.png");
 }
-#lachpq {
+
+#arcane_lach2 {
   background-image: url("assets/arcane/Lachelein_Dream_Defender.png");
 }
-#arcana {
+
+#arcane_arcana1 {
   background-image: url("assets/arcane/Arcana.png");
 }
-#arcanapq {
+
+#arcane_arcana2 {
   background-image: url("assets/arcane/Arcana_Spirit_Savior.png");
 }
-#morass {
+
+#arcane_morass1 {
   background-image: url("assets/arcane/Morass.png");
 }
-#morasspq {
-  opacity: 0.1;
+
+#arcane_morass2 {
+  background-image: url("assets/arcane/Ranheim_Defense.png");
 }
-#esfera {
+
+#arcane_esfera1 {
   background-image: url("assets/arcane/Esfera.png");
 }
-#esferapq {
-  opacity: 0.1;
+
+#arcane_esfera2 {
+  background-image: url("assets/arcane/Esfera_Guardian.png");
 }
 
 /* daily/weekly quest window */
@@ -383,6 +465,7 @@ h2 {
   border-radius: 10px;
   justify-content: center;
 }
+
 .gameview {
   display: grid;
   width: 320px;
@@ -401,6 +484,7 @@ h2 {
   justify-content: left;
   align-items: flex-end;
 }
+
 #dailyview {
   height: 750px;
   background-image: url("assets/bg/platform_0.png");
@@ -412,6 +496,7 @@ h2 {
     "five six"
     "seven eight";
 }
+
 #weeklyview {
   height: 480px;
   background-image: url("assets/bg/platform_1.png");
@@ -421,12 +506,15 @@ h2 {
     "one one one two two two"
     "three three four four five five";
 }
+
 .npc {
   position: relative;
   margin-top: 1px;
   margin-left: auto;
   margin-right: auto;
+  image-rendering: pixelated;
 }
+
 .questbulb {
   position: relative;
   background-color: transparent;
@@ -436,61 +524,77 @@ h2 {
   border: none;
   text-align: center;
   vertical-align: middle;
+  image-rendering: pixelated;
 }
-#dailyview > .questbulb {
+
+#dailyview>.questbulb {
   top: -125px;
   left: 80px;
 }
-#weeklyview > .questbulb {
+
+#weeklyview>.questbulb {
   position: relative;
   top: -145px;
   left: 50px;
 }
-#weeklyview > #bulb_guild,
-#weeklyview > #bulb_dojo {
+
+#weeklyview>#bulb_guild,
+#weeklyview>#bulb_dojo {
   position: relative;
   top: -135px;
   left: 80px;
 }
-.questbulb > img {
+
+.questbulb>img {
   position: relative;
   max-height: 25px;
   max-width: 28px;
   top: -3px;
   left: -2px;
 }
+
 .questbulb:hover img {
   top: -1px;
 }
+
 .turnedin {
   background-image: url("assets/quest/quest_complete.png");
   opacity: 0.3;
+  image-rendering: pixelated;
 }
-.turnedin > img {
+
+.turnedin>img {
   opacity: 0;
 }
 
 .fairybros {
   grid-area: one;
 }
+
 .legion {
   grid-area: two;
 }
+
 .ursus {
   grid-area: three;
 }
+
 .mapletour {
   grid-area: four;
 }
+
 .commerci {
   grid-area: five;
 }
+
 .monsterpark {
   grid-area: six;
 }
+
 .yugarden {
   grid-area: seven;
 }
+
 .phantomforest {
   grid-area: eight;
 }
@@ -498,15 +602,19 @@ h2 {
 .guild {
   grid-area: one;
 }
+
 .dojo {
   grid-area: two;
 }
+
 .scrapyard {
   grid-area: three;
 }
+
 .worldtree {
   grid-area: four;
 }
+
 .kritias {
   grid-area: five;
 }
@@ -515,30 +623,37 @@ h2 {
   top: -44px;
   left: -13px;
 }
+
 #npc_legion {
   top: -43px;
   left: -2px;
 }
+
 #npc_ursus {
   top: -44px;
   left: 0px;
 }
+
 #npc_mapletour {
   top: -45px;
   left: -5px;
 }
+
 #npc_commerci {
   top: -44px;
   left: -8px;
 }
+
 #npc_monsterpark {
   top: -45px;
   left: -21px;
 }
+
 #npc_yugarden {
   top: -45px;
   left: -7px;
 }
+
 #npc_phantomforest {
   top: -41px;
   left: -29px;
@@ -548,18 +663,22 @@ h2 {
   top: -50px;
   left: -10px;
 }
+
 #npc_dojo {
   top: -50px;
   left: -10px;
 }
+
 #npc_scrapyard {
   top: -50px;
   left: -10px;
 }
+
 #npc_worldtree {
   top: -50px;
   left: -10px;
 }
+
 #npc_kritias {
   top: -47px;
   left: -10px;
@@ -584,10 +703,12 @@ h2 {
   margin-bottom: 1px;
   text-align: center;
 }
+
 #dailyview .caption {
   top: 4px;
   left: -5px;
 }
+
 #weeklyview .caption {
   top: -2px;
   left: -10px;
@@ -597,6 +718,7 @@ h2 {
 #showDev {
   position: absolute;
 }
+
 #devButtons {
   display: none;
 }

@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="MapleStory dailies and weeklies tracker">
+    <meta name="keywords" content="maplestory, arcane, tracker, journal, boss, dailies, weeklies, reset">
     <title>Maple Journal</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png" />
 </head>
 
 <body>
-    <button id="showDev" onclick="showDev()">Dev Tools</button>
+    <button hidden id="showDev" onclick="showDev()">Dev Tools</button>
+    <script type="text/javascript" src="js/constants.js"></script>
 
-    <div id="top">
+    <header>
         <img src="assets/logo.png" alt="Maple Journal">
+        <script type="text/javascript" src="js/reset.js"></script>
 
         <!-- temporary development buttons -->
         <div id="devButtons">
             <button onclick="resetAll('daily_quest')">RESET DAILY QUEST &#8634;</button>
             <button onclick="resetAll('arcane')">RESET ARCANE &#8634;</button>
             <button onclick="resetAll('daily_boss')">RESET DAILY BOSS &#8634;</button>
-            <button onclick="resetAll('weekly_quest')">RESET WEEKLY QUEST &#8634;</button> 
-            <button onclick="resetAll('weekly_boss')">RESET WEEKLY BOSS &#8634;</button> 
+            <button onclick="resetAll('weekly_quest')">RESET WEEKLY QUEST &#8634;</button>
+            <button onclick="resetAll('weekly_boss')">RESET WEEKLY BOSS &#8634;</button>
         </div>
-    </div>
+    </header>
 
     <div id="main">
 
         <script type="text/javascript" src="js/common.js"></script>
-        <script type="text/javascript" src="js/reset.js"></script>
-        <script type="text/javascript" src="js/timer.js"></script>
+        <script type="text/javascript" src="js/state.js"></script>
 
         <!-- column 1: daily reset timer, daily quests -->
         <div class="column">
@@ -118,8 +121,7 @@
                     </div>
 
                     <img id="npc_phantomforest" class="npc phantomforest" src="assets/npc/0_Taggrin.png">
-                    <button type="button" id="bulb_phantomforest" class="questbulb phantomforest"
-                        onclick="turnIn(this.id)">
+                    <button type="button" id="bulb_phantomforest" class="questbulb phantomforest" onclick="turnIn(this.id)">
                         <img src="assets/coin/Daily_Shadowknight_Coin.png">
                     </button>
                     <div class="phantomforest">
@@ -135,107 +137,108 @@
             <!-- ARCANE RIVER DAILY QUESTS CHECKLIST -->
             <div id="arcane" class="genlist">
                 <h2 class="gridheader">ARCANE RIVER QUESTS</h2>
-                <button type="button" id="vj" onclick="checkOff(this.id)">
-                    <img id="stamp_vj" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="arcane_vj1" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_vj1" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <img src="assets/arcane/Arcane_Symbol_Vanishing_Journey.png">
-                <button type="button" id="vjpq" onclick="checkOff(this.id)">
-                    <img id="stamp_vjpq" class="stamp" src="assets/quest/stamp.png">
-                </button>
-
-                <button type="button" id="chuchu" onclick="checkOff(this.id)">
-                    <img id="stamp_chuchu" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <img src="assets/arcane/Arcane_Symbol_Chu_Chu_Island.png">
-                <button type="button" id="chuchupq" onclick="checkOff(this.id)">
-                    <img id="stamp_chuchupq" class="stamp" src="assets/quest/stamp.png">
+                <img class="arcane_symbol" src="assets/arcane/Arcane_Symbol_Vanishing_Journey.png">
+                <button type="button" id="arcane_vj2" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_vj2" class="stamp" src="assets/quest/stamp.png">
                 </button>
 
-                <button type="button" id="lach" onclick="checkOff(this.id)">
-                    <img id="stamp_lach" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="arcane_chuchu1" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_chuchu1" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <img src="assets/arcane/Arcane_Symbol_Lachelein.png">
-                <button type="button" id="lachpq" onclick="checkOff(this.id)">
-                    <img id="stamp_lachpq" class="stamp" src="assets/quest/stamp.png">
-                </button>
-
-                <button type="button" id="arcana" onclick="checkOff(this.id)">
-                    <img id="stamp_arcana" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <img src="assets/arcane/Arcane_Symbol_Arcana.png">
-                <button type="button" id="arcanapq" onclick="checkOff(this.id)">
-                    <img id="stamp_arcanapq" class="stamp" src="assets/quest/stamp.png">
+                <img class="arcane_symbol" src="assets/arcane/Arcane_Symbol_Chu_Chu_Island.png">
+                <button type="button" id="arcane_chuchu2" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_chuchu2" class="stamp" src="assets/quest/stamp.png">
                 </button>
 
-                <button type="button" id="morass" onclick="checkOff(this.id)">
-                    <img id="stamp_morass" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="arcane_lach1" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_lach1" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <img src="assets/arcane/Arcane_Symbol_Morass.png">
-                <button type="button" id="morasspq" onclick="checkOff(this.id)" disabled>
-                    <img id="stamp_morasspq" class="stamp" src="assets/quest/stamp.png">
+                <img class="arcane_symbol" src="assets/arcane/Arcane_Symbol_Lachelein.png">
+                <button type="button" id="arcane_lach2" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_lach2" class="stamp" src="assets/quest/stamp.png">
                 </button>
 
-                <button type="button" id="esfera" onclick="checkOff(this.id)">
-                    <img id="stamp_esfera" class="stamp" src="assets/quest/stamp.png"></button>
-                <img src="assets/arcane/Arcane_Symbol_Esfera.png">
-                <button type="button" id="esferapq" onclick="checkOff(this.id)" disabled>
-                    <img id="stamp_esferapq" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="arcane_arcana1" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_arcana1" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img class="arcane_symbol" src="assets/arcane/Arcane_Symbol_Arcana.png">
+                <button type="button" id="arcane_arcana2" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_arcana2" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="arcane_morass1" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_morass1" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img class="arcane_symbol" src="assets/arcane/Arcane_Symbol_Morass.png">
+                <button type="button" id="arcane_morass2" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_morass2" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="arcane_esfera1" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_esfera1" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <img class="arcane_symbol" src="assets/arcane/Arcane_Symbol_Esfera.png">
+                <button type="button" id="arcane_esfera2" onclick="checkOff(this.id)">
+                    <img id="stamp_arcane_esfera2" class="stamp" src="assets/quest/stamp.png">
                 </button>
             </div>
 
             <!-- DAILY BOSSES CHECKLIST -->
             <div id="dailyboss" class="genlist bosslist">
                 <h2 class="gridheader">DAILY BOSSES</h2>
-                <button type="button" id="dzak" onclick="checkOff(this.id)">
-                    <img id="stamp_dzak" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_zak" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_zak" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="dmag" onclick="checkOff(this.id)">
-                    <img id="stamp_dmag" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_mag" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_mag" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="dhilla" onclick="checkOff(this.id)">
-                    <img id="stamp_dhilla" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_hilla" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_hilla" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="dht" onclick="checkOff(this.id)">
-                    <img id="stamp_dht" class="stamp" src="assets/quest/stamp.png">
-                </button>
-
-                <button type="button" id="dpap" onclick="checkOff(this.id)">
-                    <img id="stamp_dpap" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="dvl" onclick="checkOff(this.id)">
-                    <img id="stamp_dvl" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="dark" onclick="checkOff(this.id)">
-                    <img id="stamp_dark" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="dpb" onclick="checkOff(this.id)">
-                    <img id="stamp_dpb" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_ht" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_ht" class="stamp" src="assets/quest/stamp.png">
                 </button>
 
-                <button type="button" id="dpierre" onclick="checkOff(this.id)">
-                    <img id="stamp_dpierre" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_pap" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_pap" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="dvb" onclick="checkOff(this.id)">
-                    <img id="stamp_dvb" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_vl" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_vl" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="dcqueen" onclick="checkOff(this.id)">
-                    <img id="stamp_dcqueen" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_ark" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_ark" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="dvell" onclick="checkOff(this.id)">
-                    <img id="stamp_dvell" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_pb" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_pb" class="stamp" src="assets/quest/stamp.png">
                 </button>
 
-                <button type="button" id="dranmaru" onclick="checkOff(this.id)">
-                    <img id="stamp_dranmaru" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_pierre" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_pierre" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="domnicln" onclick="checkOff(this.id)">
-                    <img id="stamp_domnicln" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_vb" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_vb" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="djulietta" onclick="checkOff(this.id)">
-                    <img id="stamp_djulietta" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_cqueen" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_cqueen" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="dgollux" onclick="checkOff(this.id)">
-                    <img id="stamp_dgollux" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="daily_vell" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_vell" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="daily_ranmaru" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_ranmaru" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="daily_omnicln" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_omnicln" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="daily_julietta" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_julietta" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="daily_gollux" onclick="checkOff(this.id)">
+                    <img id="stamp_daily_gollux" class="stamp" src="assets/quest/stamp.png">
                 </button>
             </div>
         </div>
@@ -339,72 +342,86 @@
             <!-- WEEKLY BOSSES CHECKLIST -->
             <div id="weeklyboss" class="genlist bosslist">
                 <h2 class="gridheader">WEEKLY BOSSES</h2>
-                <button type="button" id="whilla" onclick="checkOff(this.id)">
-                    <img id="stamp_whilla" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_hilla" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_hilla" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wpb" onclick="checkOff(this.id)">
-                    <img id="stamp_wpb" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_pb" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_pb" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wcyg" onclick="checkOff(this.id)">
-                    <img id="stamp_wcyg" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_cyg" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_cyg" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wzak" onclick="checkOff(this.id)">
-                    <img id="stamp_wzak" class="stamp" src="assets/quest/stamp.png">
-                </button>
-
-                <button type="button" id="wpierre" onclick="checkOff(this.id)">
-                    <img id="stamp_wpierre" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="wvb" onclick="checkOff(this.id)">
-                    <img id="stamp_wvb" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="wcqueen" onclick="checkOff(this.id)">
-                    <img id="stamp_wcqueen" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="wvell" onclick="checkOff(this.id)">
-                    <img id="stamp_wvell" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_zak" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_zak" class="stamp" src="assets/quest/stamp.png">
                 </button>
 
-                <button type="button" id="wpno" onclick="checkOff(this.id)">
-                    <img id="stamp_wpno" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_pierre" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_pierre" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wmag" onclick="checkOff(this.id)">
-                    <img id="stamp_wmag" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_vb" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_vb" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wpap" onclick="checkOff(this.id)">
-                    <img id="stamp_wpap" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_cqueen" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_cqueen" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wakechi" onclick="checkOff(this.id)">
-                    <img id="stamp_wakechi" class="stamp" src="assets/quest/stamp.png">
-                </button>
-
-                <button type="button" id="wlotus" onclick="checkOff(this.id)">
-                    <img id="stamp_wlotus" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="wdamien" onclick="checkOff(this.id)">
-                    <img id="stamp_wdamien" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="wlucid" onclick="checkOff(this.id)">
-                    <img id="stamp_wlucid" class="stamp" src="assets/quest/stamp.png">
-                </button>
-                <button type="button" id="wwill" onclick="checkOff(this.id)">
-                    <img id="stamp_wwill" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_vell" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_vell" class="stamp" src="assets/quest/stamp.png">
                 </button>
 
-                <button type="button" id="wgloom" onclick="checkOff(this.id)">
-                    <img id="stamp_wgloom" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_pno" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_pno" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wdnell" onclick="checkOff(this.id)">
-                    <img id="stamp_wdnell" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_mag" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_mag" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wvhilla" onclick="checkOff(this.id)">
-                    <img id="stamp_wvhilla" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_pap" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_pap" class="stamp" src="assets/quest/stamp.png">
                 </button>
-                <button type="button" id="wseren" onclick="checkOff(this.id)">
-                    <img id="stamp_wseren" class="stamp" src="assets/quest/stamp.png">
+                <button type="button" id="weekly_akechi" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_akechi" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="weekly_lotus" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_lotus" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_damien" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_damien" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_slime" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_slime" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_lucid" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_lucid" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="weekly_will" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_will" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_gloom" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_gloom" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_dnell" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_dnell" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_vhilla" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_vhilla" class="stamp" src="assets/quest/stamp.png">
+                </button>
+
+                <button type="button" id="weekly_seren" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_seren" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_kalos" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_kalos" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_kaling" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_kaling" class="stamp" src="assets/quest/stamp.png">
+                </button>
+                <button type="button" id="weekly_bmage" onclick="checkOff(this.id)">
+                    <img id="stamp_weekly_bmage" class="stamp" src="assets/quest/stamp.png">
                 </button>
             </div>
         </div>
+        <script type="text/javascript" src="js/timer.js"></script>
     </div>
 
 </body>

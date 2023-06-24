@@ -22,75 +22,25 @@ function resetQuest(elid) {
 // reset all buttons/quests within specified section
 function resetAll(type) {
     if (type == "daily_boss") {
-        resetButton("dzak");
-        resetButton("dmag");
-        resetButton("dhilla");
-        resetButton("dht");
-        resetButton("dpap");
-        resetButton("dvl");
-        resetButton("dark");
-        resetButton("dpb");
-        resetButton("dpierre");
-        resetButton("dvb");
-        resetButton("dcqueen");
-        resetButton("dvell");
-        resetButton("dranmaru");
-        resetButton("domnicln");
-        resetButton("djulietta");
-        resetButton("dgollux");
-
+        for (let i = 0; i < BOSS_DAILY.length; i++) {
+            resetButton(BOSS_DAILY[i]);
+        }
     } else if (type == "weekly_boss") {
-        resetButton("whilla");
-        resetButton("wpb");
-        resetButton("wcyg");
-        resetButton("wzak");
-        resetButton("wpierre");
-        resetButton("wvb");
-        resetButton("wcqueen");
-        resetButton("wvell");
-        resetButton("wpno");
-        resetButton("wmag");
-        resetButton("wpap");
-        resetButton("wakechi");
-        resetButton("wlotus");
-        resetButton("wdamien");
-        resetButton("wlucid");
-        resetButton("wwill");
-        resetButton("wgloom");
-        resetButton("wdnell");
-        resetButton("wvhilla");
-        resetButton("wseren");
-
+        for (let i = 0; i < BOSS_WEEKLY.length; i++) {
+            resetButton(BOSS_WEEKLY[i]);
+        }
     } else if (type == "arcane") {
-        resetButton("vj");
-        resetButton("vjpq");
-        resetButton("chuchu");
-        resetButton("chuchupq");
-        resetButton("lach");
-        resetButton("lachpq");
-        resetButton("arcana");
-        resetButton("arcanapq");
-        resetButton("morass");
-        resetButton("morasspq");
-        resetButton("esfera");
-        resetButton("esferapq");
-
+        for (let i = 0; i < ARCANE.length; i++) {
+            resetButton(ARCANE[i]);
+        }
     } else if (type == "daily_quest") {
-        resetQuest("bulb_fairybros");
-        resetQuest("bulb_legion");
-        resetQuest("bulb_ursus");
-        resetQuest("bulb_mapletour");
-        resetQuest("bulb_commerci");
-        resetQuest("bulb_monsterpark");
-        resetQuest("bulb_yugarden");
-        resetQuest("bulb_phantomforest");
-
+        for (let i = 0; i < QUEST_DAILY.length; i++) {
+            resetButton(QUEST_DAILY[i]);
+        }
     } else if (type == "weekly_quest") {
-        resetQuest("bulb_guild");
-        resetQuest("bulb_dojo");
-        resetQuest("bulb_scrapyard");
-        resetQuest("bulb_worldtree");
-        resetQuest("bulb_kritias");
+        for (let i = 0; i < QUEST_WEEKLY.length; i++) {
+            resetButton(QUEST_WEEKLY[i]);
+        }
     } else {
         return;
     }
