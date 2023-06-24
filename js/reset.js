@@ -6,8 +6,6 @@ function resetButton(elid) {
         element.classList.toggle("checked");
         image.classList.remove(...image.classList);
         image.style.opacity = 0;
-
-        image.classList.remove("stampInAnim");
     }
 }
 

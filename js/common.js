@@ -23,11 +23,17 @@ function createCheckOffFunction() {
         image.style.opacity = 1;
 
         // ====== STAMP ANIMATION CODE ======
+        let theta = getRndInteger(-60, 60) * Math.PI / 180; // randomly rotate stamp by theta radians
+
         if (skipAnimation) {
+            image.style.transform = `matrix(${Math.cos(theta)}, ${Math.sin(theta)}, ${Math.sin(theta) * -1}, ${Math.cos(theta)}, 0, 0)`;
             return;
         }
 
-        let theta = getRndInteger(-60, 60) * Math.PI / 180; // randomly rotate stamp by theta radians
+        // Remove older animations from the buffer
+        if (document.getElementById(`stampInAnim${buffer}`)) {
+            document.head.removeChild(document.getElementById(`stampInAnim${buffer}`));
+        }
 
         let newAnim = document.createElement("style");
         // insert animation css
@@ -47,27 +53,22 @@ function createCheckOffFunction() {
             }
         }
         `;
-        // Remove older animations from the buffer
-        if (document.getElementById(`anim${buffer}`)) {
-            document.head.removeChild(document.getElementById(`anim${buffer}`));
-        }
-
         // Add the animation style element to the document head
         document.head.appendChild(newAnim);
 
         // Apply the animation class to the image
         image.classList.remove(...image.classList); // Clear residual classes
-        void image.offsetWidth;
         image.classList.add(`stampInAnim${buffer}`);
 
         // Listen for the animationend event to set static image after animation ends
         image.addEventListener("animationend", function () {
+            image.classList.remove(...image.classList); // Clear residual classes
             image.classList.remove(`stampInAnim${buffer}`);
             image.style.transform = `matrix(${Math.cos(theta)}, ${Math.sin(theta)}, ${Math.sin(theta) * -1}, ${Math.cos(theta)}, 0, 0)`;
         });
 
         // Increment the buffer value
-        buffer = (buffer + 1) % 30; // Limit buffer to values 0-5
+        buffer = (buffer + 1) % 5;
     };
 }
 // Use function
