@@ -75,7 +75,10 @@ var checkOff = createCheckOffFunction();
 
 // toggle quest bulb completion
 function turnIn(elid) {
-    let element = document.getElementById(elid);
+    const element = document.getElementById(elid);
+    const newState = !element.classList.contains("turnedin");
+    storeButtonState(elid, newState);
+
     element.classList.toggle("turnedin");
 }
 

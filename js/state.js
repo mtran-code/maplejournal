@@ -41,26 +41,13 @@ function isDifferentDay(timestamp1, timestamp2) {
 }
 
 function initializeButtonStates() {
-    for (let i = 0; i < ARCANE.length; i++) {
-        let elid = ARCANE[i];
-        let element = document.getElementById(elid);
-
-        // Retrieve the button state from localStorage
-        let state = localStorage.getItem(elid);
-
-        if (state === "checked") {
-            element.classList.add("checked");
-            let image = document.getElementById("stamp_" + elid);
-            image.style.opacity = 1;
-        }
-    }
-}
-
-function initializeButtonStates() {
     const buttonIds = [
         ...ARCANE,
         ...BOSS_DAILY,
-        ...BOSS_WEEKLY,
+        ...BOSS_WEEKLY
+    ];
+
+    const bulbIds = [
         ...QUEST_DAILY,
         ...QUEST_WEEKLY
     ];
@@ -74,6 +61,19 @@ function initializeButtonStates() {
             // Use the stored state
             if (storedState) {
                 checkOff(elid, true);
+            }
+        }
+    });
+
+    bulbIds.forEach((elid) => {
+        const storedState = getButtonState(elid);
+        if (storedState === null) {
+            // No stored state or from a previous day, perform initial setup
+            resetButton(elid);
+        } else {
+            // Use the stored state
+            if (storedState) {
+                document.getElementById(elid).classList.toggle("turnedin");
             }
         }
     });
