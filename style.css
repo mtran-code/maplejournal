@@ -30,12 +30,7 @@
 
 /* general */
 body {
-  background-image: url("assets/bg/sepia-background.jpg");
-  background-color: #dbd4c2;
-  background-position: bottom;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 100%;
+  background: url("assets/bg/sepia-background.jpg") bottom/100% fixed no-repeat #dbd4c2;
 }
 
 h1 {
@@ -718,7 +713,7 @@ header>button {
 #showDev {
   position: sticky;
   color: white;
-  font-size: 18px;
+  font-size: 25px;
   height: 30px;
   width: 30px;
   position: center;
@@ -728,9 +723,14 @@ header>button {
     rgba(0, 0, 0, 0.1) 0px 79px 40px 0px inset,
     rgba(255, 255, 255, 0.9) 0px 5px 5px 0px inset;
   border: 1px solid rgb(50, 50, 50);
-  border-radius: 3px;
+  border-radius: 5px;
   justify-content: center;
   align-items: center;
+}
+
+#showDev span {
+  position: relative;
+  top: -4px;
 }
 
 #devButtons {
