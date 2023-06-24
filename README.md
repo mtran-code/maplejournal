@@ -8,7 +8,7 @@
 
 Hi, I'm just a university student who plays [MapleStory](https://maplestory.nexon.net/) sometimes. I made this to keep track of things I need to do and to practice my website coding.
 
-[Currently not updating this project anymore.]
+UPDATE: I no longer play but I just updated to include new bosses up to Kaling. Feel free to reach out if you have requests.
 
 ## Included in website
 
@@ -30,11 +30,11 @@ Hi, I'm just a university student who plays [MapleStory](https://maplestory.nexo
 - Kritias
 
 ## To be Implemented / Ideas
-- store info in browser so it won't reset on page reload
-- allow checklist items to be disabled
-- option to add personal to-do items
-- a way to save your settings
-- neat reset animation
+- [x] ~store info in browser so it won't reset on page reload~ Done!
+- [ ] allow checklist items to be disabled
+- [ ] option to add personal to-do items
+- [ ] a way to save your settings
+- [ ] neat reset animation
 
 ## Assets
 All MapleStory assets were taken from the game, and I have no ownership over them.
@@ -48,6 +48,6 @@ MIT Licence as per the [LICENSE](LICENSE).
 ## Contact
 I work on this project in my spare time, so feel free to send me comments, suggestions, anything if you want.
 
-Discord: mint#1971
+Discord: @minte3
 
 IGN: MintAran on Reboot
