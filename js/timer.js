@@ -193,5 +193,7 @@ function updateTimers() {
     console.log("updated");
 }
 
-updateTimers(); // run once on page load
-setInterval(updateTimers, 1000); // repeat every second
+document.addEventListener("DOMContentLoaded", function () {
+    updateTimers();
+    setInterval(updateTimers, 1000);
+});
