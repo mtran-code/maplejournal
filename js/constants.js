@@ -32,12 +32,16 @@ const BOSS_WEEKLY = [
     "weekly_akechi",
     "weekly_lotus",
     "weekly_damien",
+    "weekly_slime",
     "weekly_lucid",
     "weekly_will",
     "weekly_gloom",
     "weekly_dnell",
     "weekly_vhilla",
-    "weekly_seren"
+    "weekly_seren",
+    "weekly_kalos",
+    "weekly_kaling",
+    "weekly_bmage",
 ];
 
 const ARCANE = [
