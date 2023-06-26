@@ -10,24 +10,6 @@ Hi, I'm just a university student who plays [MapleStory](https://maplestory.nexo
 
 UPDATE: I no longer play but I just updated to include new bosses up to Kaling. Feel free to reach out if you have requests.
 
-## Included in website
-
-### Dailies
-- Maple Guide daily bosses
-- Arcane River daily quests and party quests
-- Fairy Bros daily gift
-- Legion coins
-- Ursus and Maple Tour
-- Commerci trades
-- Monster Park
-- Yu Garden daily quests
-- Phantom Forest daily quests
-
-### Weeklies
-- Maple Guide weekly bosses
-- Deia's G Potion
-- Scrapyard and Dark World Tree
-- Kritias
 
 ## To be Implemented / Ideas
 - [x] ~store info in browser so it won't reset on page reload~ Done!
