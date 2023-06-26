@@ -68,7 +68,7 @@ function createCheckOffFunction() {
         });
 
         // Increment the buffer value
-        buffer = (buffer + 1) % 5;
+        buffer = (buffer + 1) % 3;
     };
 }
 // Use function
