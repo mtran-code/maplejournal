@@ -73,9 +73,9 @@ main {
   padding: 15px 15px 25px;
   height: fit-content;
   width: 314px;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
 
   position: center;
   background-color: gray;
@@ -376,9 +376,9 @@ main {
 .gamewindow {
   height: fit-content;
   width: 344px;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
 
   position: center;
   background-color: gray;
