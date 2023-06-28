@@ -92,8 +92,11 @@
     background: linear-gradient(180deg,
             rgba(255, 255, 255, 1) 0%,
             rgba(219, 177, 39, 1) 100%);
-    background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    background-clip: text;
     font-size: 48px;
     font-family: "digital numbers";
 }
