@@ -5,7 +5,10 @@
     <meta name="description" content="MapleStory dailies and weeklies tracker">
     <meta name="keywords" content="maplestory, arcane, tracker, journal, boss, dailies, weeklies, reset">
     <title>Maple Journal</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/timer.css">
+
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png" />
 
     <script type="text/javascript" src="js/constants.js"></script>
@@ -27,34 +30,20 @@
         </div>
     </header>
 
-    <div id="main">
+    <div id="timers">
+        <!-- Timer div -->
+        <script type="text/javascript" src="js/timer.js"></script>
+    </div>
 
+    <main>
         <script type="text/javascript" src="js/common.js"></script>
         <script type="text/javascript" src="js/state.js"></script>
 
-        <!-- column 1: daily reset timer, daily quests -->
+        <!-- column 1: daily quests -->
         <div class="column">
-            <!-- DAILY RESET TIMER -->
-            <div class="timer">
-                <h2>
-                    DAILY RESET<br>
-                    &#128338; Time Left:
-                </h2>
-                <div class="timebox">
-                    <h2 id="timer_daily">
-                        <span id="daily_hr">00</span>
-                        <span id="daily_hr_unit" class="timeunit">Hr</span>
-                        <span id="daily_min">00</span>
-                        <span class="timeunit">Min</span>
-                        <span id="daily_sec" class="hide">00</span>
-                        <span id="daily_sec_unit" class="timeunit hide">Sec</span>
-                    </h2>
-                </div>
-            </div>
-
             <!-- DAILY QUESTS WINDOW -->
             <div id="dailywindow" class="gamewindow">
-                <h2 class="gridheader">DAILY QUESTS</h2>
+                <h2 class="gridheader">DAILY QUEST</h2>
                 <div id="dailyview" class="gameview">
                     <img id="npc_fairybros" class="npc fairybros" src="assets/npc/0_Fairy_Bros.png">
                     <button type="button" id="bulb_fairybros" class="questbulb fairybros" onclick="turnIn(this.id)">
@@ -136,7 +125,7 @@
         <div class="column">
             <!-- ARCANE RIVER DAILY QUESTS CHECKLIST -->
             <div id="arcane" class="genlist">
-                <h2 class="gridheader">ARCANE RIVER QUESTS</h2>
+                <h2 class="gridheader">ARCANE RIVER</h2>
                 <button type="button" id="arcane_vj1" onclick="checkOff(this.id)">
                     <img id="stamp_arcane_vj1" class="stamp" src="assets/quest/stamp.png">
                 </button>
@@ -188,7 +177,7 @@
 
             <!-- DAILY BOSSES CHECKLIST -->
             <div id="dailyboss" class="genlist bosslist">
-                <h2 class="gridheader">DAILY BOSSES</h2>
+                <h2 class="gridheader">DAILY BOSS</h2>
                 <button type="button" id="daily_zak" onclick="checkOff(this.id)">
                     <img id="stamp_daily_zak" class="stamp" src="assets/quest/stamp.png">
                 </button>
@@ -243,31 +232,11 @@
             </div>
         </div>
 
-        <!-- column 3: weekly reset timer, weekly quests -->
+        <!-- column 3: weekly quests -->
         <div class="column">
-            <!-- WEEKLY RESET TIMER -->
-            <div class="timer">
-                <h2>
-                    WEEKLY RESET<br>
-                    &#128338; Time Left:
-                </h2>
-                <div class="timebox">
-                    <h2 id="timer_weekly">
-                        <span id="weekly_day">00</span>
-                        <span id="weekly_day_unit" class="timeunit">Day</span>
-                        <span id="weekly_hr">00</span>
-                        <span id="weekly_hr_unit" class="timeunit">Hr</span>
-                        <span id="weekly_min" class="hide">00</span>
-                        <span id="weekly_min_unit" class="timeunit hide">Min</span>
-                        <span id="weekly_sec" class="hide">00</span>
-                        <span id="weekly_sec_unit" class="timeunit hide">Sec</span>
-                    </h2>
-                </div>
-            </div>
-
             <!-- WEEKLY QUESTS WINDOW -->
             <div id="weeklywindow" class="gamewindow">
-                <h2 class="gridheader">WEEKLY QUESTS</h2>
+                <h2 class="gridheader">WEEKLY QUEST</h2>
                 <div id="weeklyview" class="gameview">
                     <img id="npc_guild" class="npc guild" src="assets/npc/1_Deia.png">
                     <button type="button" id="bulb_guild" class="questbulb guild" onclick="turnIn(this.id)">
@@ -317,31 +286,11 @@
             </div>
         </div>
 
-        <!-- column 4: boss reset timer, weekly bosses -->
+        <!-- column 4: weekly bosses -->
         <div class="column">
-            <!-- WEEKLY BOSS RESET TIMER -->
-            <div class="timer">
-                <h2>
-                    BOSS RESET<br>
-                    &#128338; Time Left:
-                </h2>
-                <div class="timebox">
-                    <h2 id="timer_boss">
-                        <span id="boss_day">00</span>
-                        <span id="boss_day_unit" class="timeunit">Day</span>
-                        <span id="boss_hr">00</span>
-                        <span id="boss_hr_unit" class="timeunit">Hr</span>
-                        <span id="boss_min" class="hide">00</span>
-                        <span id="boss_min_unit" class="timeunit hide">Min</span>
-                        <span id="boss_sec" class="hide">00</span>
-                        <span id="boss_sec_unit" class="timeunit hide">Sec</span>
-                    </h2>
-                </div>
-            </div>
-
             <!-- WEEKLY BOSSES CHECKLIST -->
             <div id="weeklyboss" class="genlist bosslist">
-                <h2 class="gridheader">WEEKLY BOSSES</h2>
+                <h2 class="gridheader">WEEKLY BOSS</h2>
                 <button type="button" id="weekly_hilla" onclick="checkOff(this.id)">
                     <img id="stamp_weekly_hilla" class="stamp" src="assets/quest/stamp.png">
                 </button>
@@ -421,8 +370,7 @@
                 </button>
             </div>
         </div>
-        <script type="text/javascript" src="js/timer.js"></script>
-    </div>
+    </main>
 
 </body>
 

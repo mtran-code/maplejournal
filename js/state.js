@@ -12,24 +12,26 @@ function getButtonState(elid) {
     const storedData = localStorage.getItem(elid);
     if (storedData) {
         const buttonData = JSON.parse(storedData);
-        const storedTime = buttonData.timestamp;
-        const currentTime = new Date().getTime();
-        const isPreviousDay = isDifferentDay(storedTime, currentTime);
+        if (buttonData && buttonData.timestamp) {
+            const storedTime = buttonData.timestamp;
+            const currentTime = new Date().getTime();
+            const isPreviousDay = isDifferentDay(storedTime, currentTime);
 
-        if (isPreviousDay) {
-            // Ignore the stored data from a previous day
-            localStorage.removeItem(elid);
-            return null;
+            if (isPreviousDay) {
+                // Ignore the stored data from a previous day
+                localStorage.removeItem(elid);
+                return null;
+            }
+
+            // Return the button state
+            return buttonData.state;
         }
-
-        // Return the button state
-        return buttonData.state;
     }
 
     return null; // No stored data found
 }
 
-// Check if two timestamps are from different days
+// Check if two timestamps are from different UTC days
 function isDifferentDay(timestamp1, timestamp2) {
     const date1 = new Date(timestamp1);
     const date2 = new Date(timestamp2);

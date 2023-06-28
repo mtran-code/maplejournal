@@ -1,199 +1,219 @@
-// ====== COUNTDOWN TIMER CODE ======
+const timeUnits = ["day", "hr", "min", "sec"]
+
+const dailyTimersData = [
+    {
+        title: "DAILY RESET",
+        timerId: "timer-daily",
+        resetTime: new Date(Date.UTC(0, 0, 0, 0, 0, 0))
+    }
+];
+
+const weeklyTimersData = [
+    {
+        title: "WEEKLY RESET",
+        timerId: "timer-weekly",
+        resetTime: new Date(Date.UTC(0, 0, 1, 0, 0, 0)) // UTC Monday 00:00:00
+    },
+    {
+        title: "BOSS RESET",
+        timerId: "timer-boss",
+        resetTime: new Date(Date.UTC(0, 0, 4, 0, 0, 0)) // UTC Thursday 00:00:00
+    }
+];
+
+const timersContainer = document.getElementById("timers");
+
+function appendTimer(timerData) {
+    // create single timer container
+    const timerContainer = document.createElement("div");
+    timerContainer.id = timerData.timerId;
+    timerContainer.classList.add("timer");
+    timersContainer.appendChild(timerContainer);
+
+    // create timer label grid
+    const timerLabel = document.createElement("div");
+    timerLabel.classList.add("timer-label");
+    timerLabel.innerHTML = `
+      <span class="timer-title">${timerData.title}</span>
+      <span class="time-left-label">&#128338; Time Left:</span>
+    `;
+    timerContainer.appendChild(timerLabel);
+
+    // create timer display to hold time countdown
+    const timerDisplay = document.createElement("div");
+    timerDisplay.classList.add("timer-display");
+    timerContainer.appendChild(timerDisplay);
+
+    // create time values and units to timer display
+    timeUnits.forEach((unit) => {
+        const timeValue = document.createElement("span");
+        timeValue.classList.add("time-value");
+        timeValue.style.display = "inline";
+        timeValue.textContent = "00";
+
+        const timeUnit = document.createElement("span");
+        timeUnit.classList.add("time-unit");
+        timeUnit.style.display = "inline";
+        timeUnit.textContent = unit;
+
+        timerDisplay.appendChild(timeValue);
+        timerDisplay.appendChild(timeUnit);
+    });
+}
+
+function getTimeUntilDate(date) {
+    const now = new Date();
+    const targetDate = new Date(Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds()
+    ));
+    const diff = targetDate - Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        now.getUTCHours(),
+        now.getUTCMinutes(),
+        now.getUTCSeconds()
+    );
+    const seconds = Math.floor(diff / 1000 % 60);
+    const minutes = Math.floor(diff / 1000 / 60 % 60);
+    const hours = Math.floor(diff / 1000 / 60 / 60 % 24);
+    const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+    return { days, hours, minutes, seconds };
+}
+
+function getNextOccurrence(date) {
+    const now = new Date();
+    const daysLeft = (date.getUTCDay() + 7 - now.getUTCDay()) % 7;
+    const nextOccurrence = new Date(Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() + daysLeft,
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds()
+    ));
+    return nextOccurrence;
+}
+
+function formatUnits(timeValues, timeUnits, largestUnit) {
+    // 0 = days
+    // 1 = hours
+    // 2 = minutes
+
+    switch (largestUnit) {
+        case 0:
+            // show days
+            timeValues[0].style.display = "inline";
+            timeUnits[0].style.display = "inline";
+            // show hours
+            timeValues[1].style.display = "inline";
+            timeUnits[1].style.display = "inline";
+            if (timeValues[1].textContent.length === 1) {
+                timeValues[1].textContent = "0" + timeValues[1].textContent;
+            }
+            // hide minutes
+            timeValues[2].style.display = "none";
+            timeUnits[2].style.display = "none";
+            // hide seconds
+            timeValues[3].style.display = "none";
+            timeUnits[3].style.display = "none";
+
+            break;
+
+        case 1:
+            // hide days
+            timeValues[0].style.display = "none";
+            timeUnits[0].style.display = "none";
+            // show hours
+            timeValues[1].style.display = "inline";
+            timeUnits[1].style.display = "inline";
+            // show minutes
+            timeValues[2].style.display = "inline";
+            timeUnits[2].style.display = "inline";
+            if (timeValues[2].textContent.length === 1) {
+                timeValues[2].textContent = "0" + timeValues[2].textContent;
+            }
+            // hide seconds
+            timeValues[3].style.display = "none";
+            timeUnits[3].style.display = "none";
+
+            break;
+
+        case 2:
+            // hide days
+            timeValues[0].style.display = "none";
+            timeUnits[0].style.display = "none";
+            // hide hours
+            timeValues[1].style.display = "none";
+            timeUnits[1].style.display = "none";
+            // show minutes
+            timeValues[2].style.display = "inline";
+            timeUnits[2].style.display = "inline";
+            // show seconds
+            timeValues[3].style.display = "inline";
+            timeUnits[3].style.display = "inline";
+            if (timeValues[3].textContent.length === 1) {
+                timeValues[3].textContent = "0" + timeValues[3].textContent;
+            }
+
+            break;
+    }
+}
+
+function updateTimer(timerData, timings) {
+    const timer = document.getElementById(timerData.timerId);
+    const timeValues = timer.querySelectorAll("span.time-value");
+    const timeUnits = timer.querySelectorAll("span.time-unit");
+
+    timeValues[0].textContent = timings.days;
+    timeValues[1].textContent = timings.hours;
+    timeValues[2].textContent = timings.minutes;
+    timeValues[3].textContent = timings.seconds;
+
+    if (timings.days > 0) {
+        formatUnits(timeValues, timeUnits, 0)
+    } else if (timings.hours > 0) {
+        formatUnits(timeValues, timeUnits, 1)
+    } else {
+        formatUnits(timeValues, timeUnits, 2)
+    }
+}
+
+function updateDailyTimers() {
+    dailyTimersData.forEach(timerData => {
+        const nextReset = getNextOccurrence(timerData.resetTime);
+
+        const now = new Date();
+        nextReset.setUTCFullYear(now.getUTCFullYear());
+        nextReset.setUTCMonth(now.getUTCMonth());
+        nextReset.setUTCDate(now.getUTCDate() + 1);
+
+        const timings = getTimeUntilDate(nextReset);
+        updateTimer(timerData, timings);
+    })
+}
+
+function updateWeeklyTimers() {
+    weeklyTimersData.forEach(timerData => {
+        const nextReset = getNextOccurrence(timerData.resetTime);
+        const timings = getTimeUntilDate(nextReset);
+        updateTimer(timerData, timings);
+    })
+}
+
 function updateTimers() {
-    let now = new Date(); // get current time
-
-    let daily_reset = new Date();
-    daily_reset.setUTCHours(24, 0, 0, 0); // get next daily reset time
-
-    let daily_distance = daily_reset.getTime() - now.getTime(); // get time until reset
-
-    // split and convert from ms to units
-    let d_days = Math.floor(daily_distance / (1000 * 60 * 60 * 24));
-    let d_hours = Math.floor((daily_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let d_minutes = Math.floor((daily_distance % (1000 * 60 * 60)) / (1000 * 60));
-    let d_seconds = Math.floor((daily_distance % (1000 * 60)) / 1000);
-
-    // reset buttons and quests on reset
-    if (d_days == 0 &&
-        d_hours == 0 &&
-        d_minutes == 0 &&
-        d_seconds == 0) {
-        resetAll("daily_boss");
-        resetAll("arcane");
-        resetAll("daily_quest");
-    }
-
-    if (d_hours > 0) { // when hours left > 0, format: hh:mm
-        if (d_minutes < 10) {
-            d_minutes = "0" + String(d_minutes);
-        } // change single digit format (1 -> 01)
-
-        // hide/show units
-        document.getElementById("daily_hr").style.display = "inline";
-        document.getElementById("daily_hr_unit").style.display = "inline";
-        document.getElementById("daily_sec").style.display = "none";
-        document.getElementById("daily_sec_unit").style.display = "none";
-
-        document.getElementById("daily_hr").innerHTML = d_hours;
-        document.getElementById("daily_min").innerHTML = d_minutes;
-
-    } else { // when hours left = 0, format: mm:ss
-        if (d_seconds < 10) {
-            d_seconds = "0" + String(d_seconds);
-        } // change single digit format (1 -> 01)
-
-        document.getElementById("daily_hr").style.display = "none";
-        document.getElementById("daily_hr_unit").style.display = "none";
-        document.getElementById("daily_sec").style.display = "inline";
-        document.getElementById("daily_sec_unit").style.display = "inline";
-
-        document.getElementById("daily_min").innerHTML = d_minutes;
-        document.getElementById("daily_sec").innerHTML = d_seconds;
-    }
-
-    let weekly_reset = new Date();
-    weekly_reset.setUTCHours(0, 0, 0, 0);
-    let w_daysleft = ((8 - now.getUTCDay()) % 7); // get days until reset day
-    if (w_daysleft == 0) {
-        w_daysleft = 7;
-    } // if current day reset, get next weeks reset
-    weekly_reset.setUTCDate(weekly_reset.getUTCDate() + w_daysleft); // get next weekly reset time
-
-    let weekly_distance = weekly_reset.getTime() - now.getTime();
-
-    let w_days = Math.floor(weekly_distance / (1000 * 60 * 60 * 24));
-    let w_hours = Math.floor((weekly_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let w_minutes = Math.floor((weekly_distance % (1000 * 60 * 60)) / (1000 * 60));
-    let w_seconds = Math.floor((weekly_distance % (1000 * 60)) / 1000);
-
-    if (w_days == 0 &&
-        w_hours == 0 &&
-        w_minutes == 0 &&
-        w_seconds == 0) {
-        resetAll("weekly_quest");
-    }
-
-    if (w_days > 0) {
-        if (w_hours < 10) {
-            w_hours = "0" + String(w_hours);
-        }
-        document.getElementById("weekly_day").style.display = "inline";
-        document.getElementById("weekly_day_unit").style.display = "inline";
-        document.getElementById("weekly_hr").style.display = "inline";
-        document.getElementById("weekly_hr_unit").style.display = "inline";
-        document.getElementById("weekly_min").style.display = "none";
-        document.getElementById("weekly_min_unit").style.display = "none";
-        document.getElementById("weekly_sec").style.display = "none";
-        document.getElementById("weekly_sec_unit").style.display = "none";
-
-        document.getElementById("weekly_day").innerHTML = w_days;
-        document.getElementById("weekly_hr").innerHTML = w_hours;
-
-    } else if (w_hours > 0) {
-        if (w_minutes < 10) {
-            w_minutes = "0" + String(w_minutes);
-        }
-        document.getElementById("weekly_day").style.display = "none";
-        document.getElementById("weekly_day_unit").style.display = "none";
-        document.getElementById("weekly_hr").style.display = "inline";
-        document.getElementById("weekly_hr_unit").style.display = "inline";
-        document.getElementById("weekly_min").style.display = "inline";
-        document.getElementById("weekly_min_unit").style.display = "inline";
-        document.getElementById("weekly_sec").style.display = "none";
-        document.getElementById("weekly_sec_unit").style.display = "none";
-
-        document.getElementById("weekly_hr").innerHTML = w_hours;
-        document.getElementById("weekly_min").innerHTML = w_minutes;
-
-    } else {
-        if (w_seconds < 10) {
-            w_seconds = "0" + String(w_seconds);
-        }
-        document.getElementById("weekly_day").style.display = "none";
-        document.getElementById("weekly_day_unit").style.display = "none";
-        document.getElementById("weekly_hr").style.display = "none";
-        document.getElementById("weekly_hr_unit").style.display = "none";
-        document.getElementById("weekly_min").style.display = "inline";
-        document.getElementById("weekly_min_unit").style.display = "inline";
-        document.getElementById("weekly_sec").style.display = "inline";
-        document.getElementById("weekly_sec_unit").style.display = "inline";
-
-        document.getElementById("weekly_min").innerHTML = w_minutes;
-        document.getElementById("weekly_sec").innerHTML = w_seconds;
-    }
-
-    let boss_reset = new Date();
-    boss_reset.setUTCHours(0, 0, 0, 0);
-    let b_daysleft = ((11 - now.getUTCDay()) % 7); // get days until reset day
-    if (b_daysleft == 0) {
-        b_daysleft = 7;
-    } // if current day reset, get next weeks reset
-    boss_reset.setUTCDate(boss_reset.getUTCDate() + b_daysleft);
-
-    let boss_distance = boss_reset.getTime() - now.getTime();
-
-    let b_days = Math.floor(boss_distance / (1000 * 60 * 60 * 24));
-    let b_hours = Math.floor((boss_distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let b_minutes = Math.floor((boss_distance % (1000 * 60 * 60)) / (1000 * 60));
-    let b_seconds = Math.floor((boss_distance % (1000 * 60)) / 1000);
-
-    if (b_days == 0 &&
-        b_hours == 0 &&
-        b_minutes == 0 &&
-        b_seconds == 0) {
-        resetAll("weekly_boss");
-    }
-
-    if (b_days > 0) {
-        if (b_hours < 10) {
-            b_hours = "0" + String(b_hours);
-        }
-        document.getElementById("boss_day").style.display = "inline";
-        document.getElementById("boss_day_unit").style.display = "inline";
-        document.getElementById("boss_hr").style.display = "inline";
-        document.getElementById("boss_hr_unit").style.display = "inline";
-        document.getElementById("boss_min").style.display = "none";
-        document.getElementById("boss_min_unit").style.display = "none";
-        document.getElementById("boss_sec").style.display = "none";
-        document.getElementById("boss_sec_unit").style.display = "none";
-
-        document.getElementById("boss_day").innerHTML = b_days;
-        document.getElementById("boss_hr").innerHTML = b_hours;
-    } else if (b_hours > 0) {
-        if (b_minutes < 10) {
-            b_minutes = "0" + String(b_minutes);
-        }
-        document.getElementById("boss_day").style.display = "none";
-        document.getElementById("boss_day_unit").style.display = "none";
-        document.getElementById("boss_hr").style.display = "inline";
-        document.getElementById("boss_hr_unit").style.display = "inline";
-        document.getElementById("boss_min").style.display = "inline";
-        document.getElementById("boss_min_unit").style.display = "inline";
-        document.getElementById("boss_sec").style.display = "none";
-        document.getElementById("boss_sec_unit").style.display = "none";
-
-        document.getElementById("boss_hr").innerHTML = b_hours;
-        document.getElementById("boss_min").innerHTML = b_minutes;
-    } else {
-        if (b_seconds < 10) {
-            b_seconds = "0" + String(b_seconds);
-        }
-        document.getElementById("boss_day").style.display = "none";
-        document.getElementById("boss_day_unit").style.display = "none";
-        document.getElementById("boss_hr").style.display = "none";
-        document.getElementById("boss_hr_unit").style.display = "none";
-        document.getElementById("boss_min").style.display = "inline";
-        document.getElementById("boss_min_unit").style.display = "inline";
-        document.getElementById("boss_sec").style.display = "inline";
-        document.getElementById("boss_sec_unit").style.display = "inline";
-
-        document.getElementById("boss_min").innerHTML = b_minutes;
-        document.getElementById("boss_sec").innerHTML = b_seconds;
-    }
-    console.log("updated");
+    updateDailyTimers();
+    updateWeeklyTimers();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    dailyTimersData.forEach(timerData => appendTimer(timerData));
+    weeklyTimersData.forEach(timerData => appendTimer(timerData));
     updateTimers();
     setInterval(updateTimers, 1000);
 });

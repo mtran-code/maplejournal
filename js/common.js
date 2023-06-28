@@ -1,5 +1,11 @@
 // return random integer within specified range
 function getRndInteger(min, max) {
+    if (min > max) {
+        throw new Error('min must be less than max');
+    }
+    if (min === max) {
+        return min;
+    }
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
@@ -77,6 +83,9 @@ var checkOff = createCheckOffFunction();
 // toggle quest bulb completion
 function turnIn(elid) {
     const element = document.getElementById(elid);
+    if (!element) {
+        return;
+    }
     const newState = !element.classList.contains("turnedin");
     storeButtonState(elid, newState);
 
@@ -86,5 +95,7 @@ function turnIn(elid) {
 // toggle dev buttons
 function showDev() {
     let element = document.getElementById("devButtons");
-    element.style.display = (element.style.display === "block") ? "none" : "block";
+    if (element) {
+        element.style.display = (element.style.display === "block") ? "none" : "block";
+    }
 }
