@@ -15,6 +15,21 @@ body {
   background: url("../assets/bg/sepia-background.jpg") bottom/100% fixed no-repeat #dbd4c2;
 }
 
+@media (prefers-color-scheme: dark) {
+  /* dark mode */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
 h1 {
   font-family: "McLaren", Helvetica, sans-serif;
 }
