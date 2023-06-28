@@ -56,7 +56,7 @@
 
 .time-left-label {
     display: block;
-    width: 85px;
+    width: 100px;
     height: 20px;
     color: #FFF;
     grid-row: 2 / 3;
