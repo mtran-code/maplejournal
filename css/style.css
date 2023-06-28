@@ -16,7 +16,11 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-  /* dark mode */
+  body {
+    background: url("../assets/bg/sepia-background.jpg") bottom/100% fixed no-repeat #423F39;
+  }
+
+  /* dark mode tint */
   body::before {
     content: "";
     position: fixed;
