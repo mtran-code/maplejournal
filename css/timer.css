@@ -5,9 +5,17 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     box-sizing: border-box;
     margin-bottom: 50px;
+}
+
+@media (max-width: 1080px) {
+    #timers {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .timer {
@@ -79,7 +87,7 @@
 
 .time-value {
     position: relative;
-    top:2px;
+    top: 2px;
     width: 79px;
     background: linear-gradient(180deg,
             rgba(255, 255, 255, 1) 0%,
