@@ -12,11 +12,14 @@ UPDATE: I no longer play but I just updated to include new bosses up to Kaling. 
 
 
 ## To be Implemented / Ideas
-- [x] ~store info in browser so it won't reset on page reload~ Done!
+- [x] ~store info in browser so it won't reset on page reload~
 - [ ] allow checklist items to be disabled
 - [ ] option to add personal to-do items
 - [ ] a way to save your settings
 - [ ] neat reset animation
+- [ ] dark mode toggle button
+- [ ] settings button
+- [ ] sacred symbol dailies
 
 ## Assets
 All MapleStory assets were taken from the game, and I have no ownership over them.
