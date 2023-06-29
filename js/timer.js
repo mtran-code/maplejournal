@@ -88,7 +88,7 @@ function getTimeUntilDate(date) {
 
 function getNextOccurrence(date) {
     const now = new Date();
-    const daysLeft = (date.getUTCDay() + 7 - now.getUTCDay()) % 7;
+    const daysLeft = (date.getUTCDay() + 7 - now.getUTCDay()) % 7 || 7;
     const nextOccurrence = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
